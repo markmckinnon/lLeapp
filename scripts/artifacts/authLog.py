@@ -53,7 +53,6 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
                     if 'pam' not in xtype:
                         sudo_temp_data_list.append(timestamp)
                         sudo_temp_data_list.append(host)
-                        sudo_temp_data_list.append(process)
                         sudo_temp_data_list.append(xtype)
                         for sudo_data in message.split(' ; '):
                             sudo_temp_data_list.append(sudo_data)
