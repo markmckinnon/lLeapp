@@ -19,12 +19,7 @@ def get_icon_name(category, artifact):
     artifact = artifact.upper()
     icon = 'alert-triangle' # default (if not defined!)
 
-    if category.find('ACCOUNT') >= 0:
-        if artifact.find('AUTH') >= 0:  icon = 'key'
-        else:                           icon = 'user'
-    elif category == 'ADB HOSTS':       icon = 'terminal'
-    elif category == 'APP INTERACTION': icon = 'bar-chart-2'
-    elif category == 'BASH HISTORY':    icon = 'terminal'
+    if category == 'BASH HISTORY':    icon = 'terminal'
     elif category == 'BROWSER':
         if artifact.find('SEARCH TERMS') >= 0:      icon = 'search'
         elif artifact.find('DOWNLOADS') >= 0:       icon = 'download'
@@ -36,11 +31,7 @@ def get_icon_name(category, artifact):
         elif artifact.find('OFFLINE PAGES') >= 0:   icon = 'cloud-off'
         elif artifact.find('AUTOFILL') >= 0:        icon = 'edit-3'
         else:                                       icon = 'chrome'
-    elif category == 'BATTERY':         icon = 'battery-charging'
-    elif category == 'CAST':            icon = 'cast'
-    elif category == 'CALL LOGS':       icon = 'phone'
-    elif category == 'CHATS':           icon = 'message-circle'
-    elif category == 'CHROME':          
+    elif category == 'CHROME':
         if artifact.find('SEARCH TERMS') >= 0:      icon = 'search'
         elif artifact.find('DOWNLOADS') >= 0:       icon = 'download'
         elif artifact.find('BOOKMARKS') >= 0:       icon = 'bookmark'
@@ -51,82 +42,10 @@ def get_icon_name(category, artifact):
         elif artifact.find('OFFLINE PAGES') >= 0:   icon = 'cloud-off'
         elif artifact.find('AUTOFILL') >= 0:        icon = 'edit-3'
         else:                                       icon = 'chrome'
-    elif category == 'CONTACTS':    icon = 'users'
-    elif category == 'CROSH COMMANDS': icon = 'command'
-    elif category == 'LINUX VIRTUAL MACHINE': icon = 'hard-drive'
-    elif category == 'CROSS ARTIFACTS':
-        if artifact == 'CROSS ARTIFACT USERIDS': icon = 'users'
-        elif artifact == 'CROSS ARTIFACT TIMELINE': icon = 'clock'
-    elif category == 'DUO':     
-        if artifact == 'DUO CONTACTS':              icon = 'users'
-        else:                                       icon = 'message-square'
     elif category == 'LOGS':     icon = 'book'
-    elif category == 'DEVICE INFO':     
-        if artifact == 'BUILD INFO':                icon = 'terminal'
-        elif artifact == 'PARTNER SETTINGS':        icon = 'settings'
-        elif artifact.find('SETTINGS_SECURE_') >= 0: icon = 'settings'
-        else:                                       icon = 'info'
     elif category == 'ETC HOSTS':       icon = 'globe'
-    elif category == 'RDP':       icon = 'monitor'
-    elif category == 'EMULATED STORAGE METADATA':     icon = 'database'
-    elif category == 'FACEBOOK MESSENGER':      icon = 'facebook'
-    elif category == 'SETTINGS':         icon = 'settings'
-    elif category == 'PREFERENCES':         icon = 'settings'
-    elif category == 'GBOARD KEYBOARD': icon = 'edit-3'
-    elif category == 'QUICKEDIT': icon = 'edit'
-    elif category == 'GOOGLE DOCS':     icon = 'file'
-    elif category == 'GOOGLE NOW & QUICKSEARCH': icon = 'search'
-    elif category == 'GOOGLE PLAY':     
-        if artifact == 'GOOGLE PLAY SEARCHES':      icon = 'search'
-        else:                                       icon = 'play'
-    elif category == 'ANDROID GMS':  icon = 'database'
-    elif category == 'TEAMS':
-        if artifact == 'TEAMS MESSAGES':  icon = 'message-circle'
-        elif artifact == 'TEAMS USERS':  icon = 'users'
-        elif artifact == 'TEAMS CALL LOG':  icon = 'phone'
-        elif artifact == 'TEAMS ACTIVITY FEED':  icon = 'at-sign'
-        elif artifact == 'TEAMS FILE INFO':  icon = 'file'
-        else:                           icon = 'file-text'
-    elif category == 'SKYPE':
-        if artifact == 'SKYPE - LOCAL ADDRESS BOOK CONTACTS':  icon = 'users'
-        else:                               icon = 'corner-down-right'
-    elif category == 'TIKTOK':
-        if artifact == 'TIKTOK - USERS':  icon = 'users'
-        else:                               icon = 'corner-down-right'
-    elif category == 'INSTAGRAM':
-        if artifact == 'INSTAGRAM USERS':  icon = 'users'
-        else:                               icon = 'instagram'
-    elif category == 'GOOGLEDOCS':
-        if 'SHEETS' in artifact:  icon = 'bar-chart-2'
-        else:                               icon = 'align-left'
     elif category == 'INSTALLED APPS':  icon = 'package'
     elif category == 'MEDIA METADATA':  icon = 'file-plus'
-    elif category == 'NOW PLAYING':           icon = 'music'
-    elif category == 'RCS CHATS':       icon = 'message-circle'
-    elif category == 'DOWNLOADS':       icon = 'download'
-    elif category == 'LEVELDB':       icon = 'database'
-    elif category == 'VPN':       icon = 'shield'
-    elif category == 'RECENT ACTIVITY': icon = 'activity'
-    elif category == 'SAMSUNG_CMH':     icon = 'disc'
-    elif category == 'SCRIPT LOGS':     icon = 'archive'
-    elif category == 'SMS & MMS':       icon = 'message-square'
-    elif category == 'SQLITE JOURNALING': icon = 'book-open'
-    elif category == 'SYNCED USERS' : icon = 'user'
-    elif category == 'USAGE STATS':     icon = 'bar-chart-2'
-    elif category == 'USER SETTINGS': icon = 'book'
-    elif category == 'WELLBEING' or category == 'WELLBEING ACCOUNT': 
-        if artifact == 'ACCOUNT DATA':  icon = 'user'
-        else:                           icon = 'layers'
-    elif category == 'WIFI PROFILES':  icon = 'wifi'
-    elif category == 'PERMISSIONS':  icon = 'check'
-    elif category == 'APP ROLES':  icon = 'tool'
-    elif category == 'VLC':
-        if artifact == 'VLC MEDIA LIST':  icon = 'film'
-        if artifact == 'VLC THUMBNAILS':  icon = 'image'
-    elif category == 'TIKTOK':
-        if artifact == 'MESSAGES':  icon = 'message-square'
-        if artifact == 'CONTACTS':  icon = 'user'
-    elif category == 'VITAL PRODUCT DATA':         icon = 'settings'
     return icon
     
 def generate_report(reportfolderbase, time_in_secs, time_HMS, extraction_type, image_input_path):
@@ -253,19 +172,19 @@ def create_index_html(reportfolderbase, time_in_secs, time_HMS, extraction_type,
 
     content += '</div>' # CARD end
 
-    authors_data = generate_authors_table_code(cleapp_contributors)
+    authors_data = generate_authors_table_code(lleapp_contributors)
     credits_code = credits_block.format(authors_data)
 
     # WRITE INDEX.HTML LAST
     filename = 'index.html'
-    page_title = 'CLEAPP Report'
-    body_heading = 'Chrome Logs Events And Protobuf Parser'
-    body_description = 'CLEAPP is an open source project that aims to parse every known Chrome artifact for the purpose of forensic analysis.'
+    page_title = 'lLEAPP Report'
+    body_heading = 'Linux Logs Events And Parsers'
+    body_description = 'LLEAPP is an open source project that aims to parse every known Linux artifact for the purpose of forensic analysis.'
     active_nav_list_data = mark_item_active(nav_list_data, filename) + nav_bar_script
 
     f = open(os.path.join(reportfolderbase, filename), 'w', encoding='utf8')
     f.write(page_header.format(page_title))
-    f.write(body_start.format(f"CLEAPP {cleapp_version}"))
+    f.write(body_start.format(f"LLEAPP {lleapp_version}"))
     f.write(body_sidebar_setup + active_nav_list_data + body_sidebar_trailer)
     f.write(body_main_header + body_main_data_title.format(body_heading, body_description))
     f.write(content)
@@ -274,9 +193,9 @@ def create_index_html(reportfolderbase, time_in_secs, time_HMS, extraction_type,
     f.write(body_main_trailer + body_end + nav_bar_script_footer + page_footer)
     f.close()
 
-def generate_authors_table_code(cleapp_contributors):
+def generate_authors_table_code(lleapp_contributors):
     authors_data = ''
-    for author_name, blog, tweet_handle, git in cleapp_contributors:
+    for author_name, blog, tweet_handle, git in lleapp_contributors:
         author_data = ''
         if blog:
             author_data += f'<a href="{blog}" target="_blank">{blog_icon}</a> &nbsp;\n'

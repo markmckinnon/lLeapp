@@ -21,8 +21,8 @@ class ArtifactHtmlReport:
         '''Creates the report HTML file and writes the artifact name as a heading'''
         self.report_file_path = os.path.join(os.path.split(report_folder.rstrip('\\'))[0], f'{artifact_file_name}.html')
         self.report_file = open(os.path.join(report_folder, f'{artifact_file_name}.temphtml'), 'w', encoding='utf8')
-        self.report_file.write(page_header.format(f'CLEAPP - {self.artifact_name} report'))
-        self.report_file.write(body_start.format(f'CLEAPP {cleapp_version}'))
+        self.report_file.write(page_header.format(f'LLEAPP - {self.artifact_name} report'))
+        self.report_file.write(body_start.format(f'LLEAPP {lleapp_version}'))
         self.report_file.write(body_sidebar_setup)
         self.report_file.write(body_sidebar_dynamic_data_placeholder) # placeholder for sidebar data
         self.report_file.write(body_sidebar_trailer)

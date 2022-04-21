@@ -2,7 +2,7 @@
 
 block_cipher = None
 
-a = Analysis(['cleappGUI.py'],
+a = Analysis(['lleappGUI.py'],
              pathex=[],
              binaries=[],
              datas=[('.\\scripts\\logo.jpg', '.\\scripts'),
@@ -27,7 +27,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='cleappGUI',
+          name='lleappGUI',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
