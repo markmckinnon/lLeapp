@@ -157,7 +157,7 @@ body_main_data = \
                         <tbody>
                             <tr>
                                 <td>Extraction Location</td>
-                                <td>N:\cleapp_images\Pixel 5</td>
+                                <td>N:\lleapp_images\Pixel 5</td>
                             </tr>
                         </tbody>
                     </table>
@@ -205,13 +205,13 @@ thank_you_note = \
                             </div>
                             <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">Thank you for using CLEAPP</h5>
+                                <h5 class="card-title">Thank you for using LLEAPP</h5>
                                 <p class="card-text">
                                     Support open source and report any bugs!
                                 </p>
                                 <!--Github-->
-                                <a class="btn-floating btn-git" type="button" role="button" href="https://github.com/markmckinnon/cleapp" target="_blank"><i class="fab fa-github"></i> Project Home </a>
-                                <p class="card-text fadeIn"><small class="text-muted">CLEAPP Team</small></p>
+                                <a class="btn-floating btn-git" type="button" role="button" href="https://github.com/markmckinnon/lleapp" target="_blank"><i class="fab fa-github"></i> Project Home </a>
+                                <p class="card-text fadeIn"><small class="text-muted">LLEAPP Team</small></p>
                             </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@ thank_you_note = \
 credits_block = \
 """
     <div class="alert alert-light mb-4 bg-white" style="border-style: none">
-        <h4 class="text-center">cleapp contributors</h4>
+        <h4 class="text-center">lleapp contributors</h4>
         <ul class="list-group" style="max-width: 500px; margin:auto">
             {}
         </ul>

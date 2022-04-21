@@ -21,6 +21,9 @@ from scripts.artifacts.chromeNetworkActionPredictor import get_chromeNetworkActi
 from scripts.artifacts.firefox import get_firefox
 from scripts.artifacts.firefoxDownloads import get_firefoxDownloads
 from scripts.artifacts.firefoxCookies import get_firefoxCookies
+from scripts.artifacts.wtmp import get_wtmp
+from scripts.artifacts.btmp import get_btmp
+from scripts.artifacts.authLog import get_auth_log
 
 from scripts.lleapfuncs import *
 
@@ -31,7 +34,7 @@ from scripts.lleapfuncs import *
 # For example: If modulename='profit', function name must be get_profit(..)
 # Don't forget to import the module above!!!!
 
-# These are external databases that are created during the run of cLeapp that we want to add into
+# These are external databases that are created during the run of lLeapp that we want to add into
 # after everything has been processed.  The file it looks for is used as a place holder to make the logic
 # work, this file should always be present in a ChromeOs system
 to_search_external_dbs = {
@@ -40,7 +43,7 @@ to_search_external_dbs = {
 }
 
 # These are all the artifacts that need to be processed from a ChromeOs
-tosearch_cLeapp = {
+tosearch_lLeapp = {
 # Browsers
     'chrome':('Browser', ('**/mount/user/History*', '**/chronos/LockScreenAppsProfile/History*', '**/chronos/Default/History*', '**/com.brave.browser/app_chrome/Default/History*', '**/com.opera.browser/app_opera/History*')),
     'chromeDownloads':('Browser', ('**/mount/user/History*', '**/chronos/LockScreenAppsProfile/History*', '**/chronos/Default/History*', '**/com.brave.browser/app_chrome/Default/History*', '**/com.opera.browser/app_opera/History*')),
@@ -56,10 +59,14 @@ tosearch_cLeapp = {
     'firefox':('Browser', '**/org.mozilla.firefox/files/places.sqlite*'),
     'firefoxDownloads':('Browser', '**/org.mozilla.firefox/files/places.sqlite*'),
     'firefoxCookies':('Browser', '**/org.mozilla.firefox/databases/mozac_downloads_database*'),
+# Log files
+    'wtmp':('Logs', '**/var/logs/wtmp'),
+    'btmp': ('Logs', '**/var/logs/btmp'),
+    'auth_log': ('Logs', '**/var/logs/auth.log'),
 }
 
 # This is the order the artifacts must be processed.
-tosearch = dict(tosearch_cLeapp)
+tosearch = dict(tosearch_lLeapp)
 tosearch.update(to_search_external_dbs)
 
 slash = '\\' if is_platform_windows() else '/'

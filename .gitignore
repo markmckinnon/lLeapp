@@ -1,0 +1,17 @@
+
+.idea/vcs.xml
+*.pyc
+venv\*
+venv/Scripts/utmp.exe
+venv/Lib/site-packages/utmp/reader.py
+venv/Lib/site-packages/utmp/__main__.py
+venv/Lib/site-packages/utmp/__init__.py
+venv/Lib/site-packages/utmp-21.10.0.dist-info/WHEEL
+venv/Lib/site-packages/utmp-21.10.0.dist-info/top_level.txt
+venv/Lib/site-packages/utmp-21.10.0.dist-info/REQUESTED
+venv/Lib/site-packages/utmp-21.10.0.dist-info/RECORD
+venv/Lib/site-packages/utmp-21.10.0.dist-info/METADATA
+venv/Lib/site-packages/utmp-21.10.0.dist-info/LICENSE.txt
+venv/Lib/site-packages/utmp-21.10.0.dist-info/INSTALLER
+venv/Lib/site-packages/utmp-21.10.0.dist-info/entry_points.txt
+.idea/vcs.xml
