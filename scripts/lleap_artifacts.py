@@ -24,6 +24,7 @@ from scripts.artifacts.firefoxCookies import get_firefoxCookies
 from scripts.artifacts.wtmp import get_wtmp
 from scripts.artifacts.btmp import get_btmp
 from scripts.artifacts.authLog import get_auth_log
+from scripts.artifacts.apacheLogs import get_apache_logs
 
 from scripts.lleapfuncs import *
 
@@ -63,6 +64,7 @@ tosearch_lLeapp = {
     'wtmp':('Logs', '**/var/logs/wtmp'),
     'btmp': ('Logs', '**/var/logs/btmp'),
     'auth_log': ('Logs', '**/var/logs/auth.log'),
+    'apache_logs':('Logs', '**/var/logs/apache2/access.log')
 }
 
 # This is the order the artifacts must be processed.
