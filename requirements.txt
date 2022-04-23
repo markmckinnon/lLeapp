@@ -7,3 +7,6 @@ simplekml
 xmltodict
 utmp
 apachelogs
+python-geoip-geolite2
+python-geoip
+
