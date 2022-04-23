@@ -6,3 +6,7 @@ PySimpleGUI==4.16.0
 simplekml
 xmltodict
 utmp
+apachelogs
+python-geoip-geolite2
+python-geoip
+
