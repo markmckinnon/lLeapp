@@ -25,7 +25,7 @@ from scripts.artifacts.wtmp import get_wtmp
 from scripts.artifacts.btmp import get_btmp
 from scripts.artifacts.authLog import get_auth_log
 from scripts.artifacts.apacheLogs import get_apache_logs
-
+from scripts.artifacts.aptHistory import get_apt_history_log
 from scripts.lleapfuncs import *
 
 # GREP searches for each module
@@ -64,7 +64,8 @@ tosearch_lLeapp = {
     'wtmp':('Logs', '**/var/logs/wtmp'),
     'btmp': ('Logs', '**/var/logs/btmp'),
     'auth_log': ('Logs', '**/var/logs/auth.log'),
-    'apache_logs':('Logs', '**/var/logs/apache2/access.log')
+    'apache_logs':('Apache Logs', '**/var/logs/apache2/access.log'),
+    'apt_history_log':('APT Logs', '**/var/logs/apt/history.log')
 }
 
 # This is the order the artifacts must be processed.

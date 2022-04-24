@@ -19,7 +19,9 @@ def get_icon_name(category, artifact):
     artifact = artifact.upper()
     icon = 'alert-triangle' # default (if not defined!)
 
-    if category == 'BASH HISTORY':    icon = 'terminal'
+    if category == 'APACHE LOGS':                   icon = 'feather'
+    elif category == 'APT LOGS':                    icon = 'briefcase'
+    elif category == 'BASH HISTORY':                icon = 'terminal'
     elif category == 'BROWSER':
         if artifact.find('SEARCH TERMS') >= 0:      icon = 'search'
         elif artifact.find('DOWNLOADS') >= 0:       icon = 'download'
