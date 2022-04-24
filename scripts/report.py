@@ -48,6 +48,7 @@ def get_icon_name(category, artifact):
     elif category == 'ETC HOSTS':       icon = 'globe'
     elif category == 'INSTALLED APPS':  icon = 'package'
     elif category == 'MEDIA METADATA':  icon = 'file-plus'
+    elif category == 'TIMEZONE':        icon = 'clock'
     return icon
     
 def generate_report(reportfolderbase, time_in_secs, time_HMS, extraction_type, image_input_path):

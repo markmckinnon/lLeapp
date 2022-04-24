@@ -26,6 +26,8 @@ from scripts.artifacts.btmp import get_btmp
 from scripts.artifacts.authLog import get_auth_log
 from scripts.artifacts.apacheLogs import get_apache_logs
 from scripts.artifacts.aptHistory import get_apt_history_log
+from scripts.artifacts.timezone import get_timezone
+
 from scripts.lleapfuncs import *
 
 # GREP searches for each module
@@ -65,7 +67,9 @@ tosearch_lLeapp = {
     'btmp': ('Logs', '**/var/logs/btmp'),
     'auth_log': ('Logs', '**/var/logs/auth.log'),
     'apache_logs':('Apache Logs', '**/var/logs/apache2/access.log'),
-    'apt_history_log':('APT Logs', '**/var/logs/apt/history.log')
+    'apt_history_log':('APT Logs', '**/var/logs/apt/history.log'),
+# Misc Files
+    'timezone': ('Timezone', '**/etc/timezone'),
 }
 
 # This is the order the artifacts must be processed.

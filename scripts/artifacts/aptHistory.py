@@ -9,7 +9,6 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
-        data_headers = ('start_date', 'type', 'commandline', 'end_date')
         data_list = []
         data_installed_programs_list = []
         data_removed_programs_list = []
