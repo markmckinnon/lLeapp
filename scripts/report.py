@@ -19,7 +19,9 @@ def get_icon_name(category, artifact):
     artifact = artifact.upper()
     icon = 'alert-triangle' # default (if not defined!)
 
-    if category == 'BASH HISTORY':    icon = 'terminal'
+    if category == 'APACHE LOGS':                   icon = 'feather'
+    elif category == 'APT LOGS':                    icon = 'briefcase'
+    elif category == 'BASH HISTORY':                icon = 'terminal'
     elif category == 'BROWSER':
         if artifact.find('SEARCH TERMS') >= 0:      icon = 'search'
         elif artifact.find('DOWNLOADS') >= 0:       icon = 'download'
@@ -46,6 +48,7 @@ def get_icon_name(category, artifact):
     elif category == 'ETC HOSTS':       icon = 'globe'
     elif category == 'INSTALLED APPS':  icon = 'package'
     elif category == 'MEDIA METADATA':  icon = 'file-plus'
+    elif category == 'TIMEZONE':        icon = 'clock'
     return icon
     
 def generate_report(reportfolderbase, time_in_secs, time_HMS, extraction_type, image_input_path):

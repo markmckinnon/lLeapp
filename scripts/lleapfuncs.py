@@ -410,4 +410,15 @@ def clean_up_br(data_list):
             item_cleaned.append(t) 
         clean_list.append(item_cleaned)
         item_cleaned =[]
-    return clean_list    
+    return clean_list
+
+def get_user_name_from_home(path):
+    new_path = os.path.normpath(path)
+    path_list = new_path.split(os.sep)
+    part_num = 0
+    for part_name in path_list:
+        if part_name == 'home':
+            part_num = part_num + 1
+            break
+        part_num = part_num + 1
+    return path_list[part_num]
