@@ -28,6 +28,7 @@ from scripts.artifacts.apacheLogs import get_apache_logs
 from scripts.artifacts.aptHistory import get_apt_history_log
 from scripts.artifacts.timezone import get_timezone
 from scripts.artifacts.bashHistory import get_bash_history
+from scripts.artifacts.hostname import get_hostname
 
 from scripts.lleapfuncs import *
 
@@ -71,6 +72,7 @@ tosearch_lLeapp = {
     'apt_history_log':('APT Logs', '**/var/logs/apt/history.log'),
 # Misc Files
     'timezone': ('Timezone', '**/etc/timezone'),
+    'hostname': ('Etc Hosts', '**/etc/hostname'),
     'bash_history':('Bash History', '**/home/*/.bash_history')
 }
 
