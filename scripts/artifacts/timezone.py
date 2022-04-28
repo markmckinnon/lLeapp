@@ -1,7 +1,7 @@
 import os
 
 from scripts.artifact_report import ArtifactHtmlReport
-from scripts.lleapfuncs import logfunc, tsv, timeline, is_platform_windows, get_next_unused_name, open_sqlite_db_readonly, get_browser_name
+from scripts.lleapfuncs import logfunc, tsv, get_next_unused_name
 
 
 def get_timezone(files_found, report_folder, seeker, wrap_text):

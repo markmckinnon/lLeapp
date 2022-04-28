@@ -1,12 +1,8 @@
 import argparse
 import io
-import os
 import scripts.report as report
-import shutil
-import traceback
 
 from scripts.search_files import *
-from scripts.lleapfuncs import *
 from scripts.lleap_artifacts import *
 from scripts.version_info import lleapp_version
 from time import process_time, gmtime, strftime
