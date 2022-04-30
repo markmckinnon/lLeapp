@@ -31,6 +31,7 @@ from scripts.artifacts.bashHistory import get_bash_history
 from scripts.artifacts.hostname import get_hostname
 from scripts.artifacts.osinfo import get_osinfo
 from scripts.artifacts.trash import get_trash
+from scripts.artifacts.libraoffice import get_libraOfficeRecentFiles
 
 from scripts.lleapfuncs import *
 
@@ -77,7 +78,8 @@ tosearch_lLeapp = {
     'hostname': ('Etc Hosts', '**/etc/hostname'),
     'bash_history':('Bash History', '**/home/*/.bash_history'),
     'osinfo':('OS Info', '**/usr/lib/os-release', '**/etc/os-release'),
-    'trash':('Trash', '**/home/*/.local/share/Trash/info/**')
+    'trash':('Trash', '**/home/*/.local/share/Trash/info/**'),
+    'libraOfficeRecentFiles':('Recent Documents', '**/home/*/.config/libreoffice/4/user/registrymodifications.xcu'),
 }
 
 # This is the order the artifacts must be processed.

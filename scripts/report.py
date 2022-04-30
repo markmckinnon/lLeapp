@@ -48,6 +48,7 @@ def get_icon_name(category, artifact):
     elif category == 'ETC HOSTS':       icon = 'globe'
     elif category == 'INSTALLED APPS':  icon = 'package'
     elif category == 'MEDIA METADATA':  icon = 'file-plus'
+    elif category == 'RECENT DOCUMENTS': icon = 'file-text'
     elif category == 'TIMEZONE':        icon = 'clock'
     elif category == 'TRASH':           icon = 'trash-2'
     return icon
