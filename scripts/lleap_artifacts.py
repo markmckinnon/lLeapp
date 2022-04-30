@@ -30,6 +30,7 @@ from scripts.artifacts.timezone import get_timezone
 from scripts.artifacts.bashHistory import get_bash_history
 from scripts.artifacts.hostname import get_hostname
 from scripts.artifacts.osinfo import get_osinfo
+from scripts.artifacts.trash import get_trash
 
 from scripts.lleapfuncs import *
 
@@ -75,7 +76,8 @@ tosearch_lLeapp = {
     'timezone': ('Timezone', '**/etc/timezone'),
     'hostname': ('Etc Hosts', '**/etc/hostname'),
     'bash_history':('Bash History', '**/home/*/.bash_history'),
-    'osinfo':('OS Info', '**/usr/lib/os-release', '**/etc/os-release')
+    'osinfo':('OS Info', '**/usr/lib/os-release', '**/etc/os-release'),
+    'trash':('Trash', '**/home/*/.local/share/Trash/info/**')
 }
 
 # This is the order the artifacts must be processed.
