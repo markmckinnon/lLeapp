@@ -32,6 +32,9 @@ from scripts.artifacts.hostname import get_hostname
 from scripts.artifacts.osinfo import get_osinfo
 from scripts.artifacts.trash import get_trash
 from scripts.artifacts.libraoffice import get_libraOfficeRecentFiles
+from scripts.artifacts.passwd import get_passwd
+from scripts.artifacts.group import get_group
+from scripts.artifacts.shadow import get_shadow
 
 from scripts.lleapfuncs import *
 
@@ -80,6 +83,9 @@ tosearch_lLeapp = {
     'osinfo':('OS Info', '**/usr/lib/os-release', '**/etc/os-release'),
     'trash':('Trash', '**/home/*/.local/share/Trash/info/**'),
     'libraOfficeRecentFiles':('Recent Documents', '**/home/*/.config/libreoffice/4/user/registrymodifications.xcu'),
+    'passwd':('Users', '**/etc/passwd'),
+    'group':('Users', '**/etc/group'),
+    'shadow':('Users', '**/etc/shadow')
 }
 
 # This is the order the artifacts must be processed.
