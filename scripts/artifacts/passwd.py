@@ -9,12 +9,16 @@ def get_passwd(files_found, report_folder, seeker, wrap_text):
     for file_found in files_found:
         file_found = str(file_found)
         data_list = []
+        data_list_uid_0 = []
         with open(file_found, 'r') as f:
             lines = f.readlines()
             for line in lines:
                 temp_data_list = []
-                for column in line.split(':'):
+                column_data = line.split(':')
+                for column in column_data:
                     temp_data_list.append(column)
+                if column_data[2] == '0':
+                    data_list_uid_0.append([column_data[0]])
                 data_list.append(temp_data_list)
 
         usageentries = len(data_list)
@@ -35,3 +39,23 @@ def get_passwd(files_found, report_folder, seeker, wrap_text):
             
         else:
             logfunc(f'No passwd data available')
+
+        usageentries = len(data_list_uid_0)
+        if usageentries > 0:
+            report = ArtifactHtmlReport(f'UID_0')
+            # check for existing and get next name for report file, so report from another file does not get overwritten
+            report_path = os.path.join(report_folder, f'UID_0.temphtml')
+            report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
+            report.start_artifact_report(report_folder, os.path.basename(report_path))
+            report.add_script()
+            data_header = []
+            data_header.append('username')
+
+            report.write_artifact_data_table(data_header, data_list_uid_0, file_found)
+            report.end_artifact_report()
+
+            tsvname = f'UID_0'
+            tsv(report_folder, data_header, data_list_uid_0, tsvname)
+
+        else:
+            logfunc(f'No UID_0 data available')
