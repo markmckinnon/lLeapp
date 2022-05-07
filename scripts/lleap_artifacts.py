@@ -7,17 +7,17 @@
 
 import traceback
 
-from scripts.artifacts.chrome import get_chrome
-from scripts.artifacts.chromeDownloads import get_chromeDownloads
-from scripts.artifacts.chromeCookies import get_chromeCookies
-from scripts.artifacts.chromeAutofill import get_chromeAutofill
-from scripts.artifacts.chromeLoginData import get_chromeLoginData
-from scripts.artifacts.chromeBookmarks import get_chromeBookmarks
-from scripts.artifacts.chromeOmnibox import get_chromeOmnibox
-from scripts.artifacts.chromeSearchTerms import get_chromeSearchTerms
-from scripts.artifacts.chromeTopSites import get_chromeTopSites
-from scripts.artifacts.chromeWebsearch import get_chromeWebsearch
-from scripts.artifacts.chromeNetworkActionPredictor import get_chromeNetworkActionPredictor
+from scripts.artifacts.chromium import get_chrome
+from scripts.artifacts.chromiumDownloads import get_chromeDownloads
+from scripts.artifacts.chromiumCookies import get_chromeCookies
+from scripts.artifacts.chromiumAutofill import get_chromeAutofill
+from scripts.artifacts.chromiumLoginData import get_chromeLoginData
+from scripts.artifacts.chromiumBookmarks import get_chromeBookmarks
+from scripts.artifacts.chromiumOmnibox import get_chromeOmnibox
+from scripts.artifacts.chromiumSearchTerms import get_chromeSearchTerms
+from scripts.artifacts.chromiumTopSites import get_chromeTopSites
+from scripts.artifacts.chromiumWebsearch import get_chromeWebsearch
+from scripts.artifacts.chromiumNetworkActionPredictor import get_chromeNetworkActionPredictor
 from scripts.artifacts.firefox import get_firefox
 from scripts.artifacts.firefoxDownloads import get_firefoxDownloads
 from scripts.artifacts.firefoxCookies import get_firefoxCookies
@@ -35,6 +35,7 @@ from scripts.artifacts.libraoffice import get_libraOfficeRecentFiles
 from scripts.artifacts.passwd import get_passwd
 from scripts.artifacts.group import get_group
 from scripts.artifacts.shadow import get_shadow
+from scripts.artifacts.dockerconfig import get_docker_config
 
 from scripts.lleapfuncs import *
 
@@ -85,7 +86,10 @@ tosearch_lLeapp = {
     'libraOfficeRecentFiles':('Recent Documents', '**/home/*/.config/libreoffice/4/user/registrymodifications.xcu'),
     'passwd':('Users', '**/etc/passwd'),
     'group':('Users', '**/etc/group'),
-    'shadow':('Users', '**/etc/shadow')
+    'shadow':('Users', '**/etc/shadow'),
+# Docker
+    'docker_config': ('Docker', '**/docker\containers\*\config.v2.json'),
+
 }
 
 # This is the order the artifacts must be processed.

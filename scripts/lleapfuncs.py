@@ -333,14 +333,30 @@ def usergen(report_folder, data_list_usernames):
     
 
 def get_browser_name(file_name):
-    if 'com.brave.browser' in file_name.lower():
-        return 'Brave'
-    elif 'com.opera.browser' in file_name.lower():
-        return 'Opera'
-    elif 'com.duckduckgo.mobile.android' in file_name.lower():
-        return 'Duck Duck Go'
+    if "chromium" in file_name.lower():
+        return "Chromium"
+    elif "brave" in file_name.lower():
+        return "Brave"
+    elif "edge" in file_name.lower():
+        return "Edge"
+    elif "yandex" in file_name.lower():
+        return "Yandex"
+    elif "avast" in file_name.lower():
+        return "Avast"
+    elif "opera" in file_name.lower():
+        return "Opera"
+    elif "vivaldi" in file_name.lower():
+        return "Vivaldi"
+    elif "falkon" in file_name.lower():
+        return "Falkon"
+    elif "midori" in file_name.lower():
+        return "Midori"
+    elif "epiphany" in file_name.lower():
+        return "Epiphany"
+    elif "chrome" in file_name.lower():
+        return "Chrome"
     else:
-        return 'Chromebook'
+        return "Unknown Chromium"
 
 def get_ldb_records(ldb_path, prefix=''):
     """Open a LevelDB at given path and return a list of records, optionally
@@ -422,3 +438,4 @@ def get_user_name_from_home(path):
             break
         part_num = part_num + 1
     return path_list[part_num]
+
