@@ -37,6 +37,8 @@ from scripts.artifacts.group import get_group
 from scripts.artifacts.shadow import get_shadow
 from scripts.artifacts.dockerconfig import get_docker_config
 from scripts.artifacts.viminfo import get_viminfo
+from scripts.artifacts.mtab import get_mtab
+from scripts.artifacts.fstab import get_fstab
 
 from scripts.lleapfuncs import *
 
@@ -89,6 +91,8 @@ tosearch_lLeapp = {
     'group':('Users', '**/etc/group'),
     'shadow':('Users', '**/etc/shadow'),
     'viminfo':('Recent Documents', '**/home/*/.viminfo'),
+    'mtab':('Devices', '**/etc/mtab'),
+    'fstab':('Devices', '**/etc/fstab'),
 # Docker
     'docker_config': ('Docker', '**/docker\containers\*\config.v2.json'),
 

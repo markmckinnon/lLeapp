@@ -44,6 +44,7 @@ def get_icon_name(category, artifact):
         elif artifact.find('OFFLINE PAGES') >= 0:   icon = 'cloud-off'
         elif artifact.find('AUTOFILL') >= 0:        icon = 'edit-3'
         else:                                       icon = 'chrome'
+    elif category == 'DEVICES':                     icon = 'hard-drive'
     elif category == 'LOGS':     icon = 'book'
     elif category == 'ETC HOSTS':       icon = 'globe'
     elif category == 'INSTALLED APPS':  icon = 'package'
