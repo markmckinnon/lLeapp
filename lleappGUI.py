@@ -151,7 +151,7 @@ while True:
             GuiWindow.window_handle = window
             out_params = OutputParameters(output_folder)
             wrap_text = True
-            crunch_successful = lleapp.crunch_artifacts(search_list, extracttype, input_path, out_params, len(cleapp.tosearch)/s_items, wrap_text)
+            crunch_successful = lleapp.crunch_artifacts(search_list, extracttype, input_path, out_params, len(lleapp.tosearch)/s_items, wrap_text)
             if crunch_successful:
                 report_path = os.path.join(out_params.report_folder_base, 'index.html')
                     
