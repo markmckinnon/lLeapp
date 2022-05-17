@@ -439,3 +439,8 @@ def get_user_name_from_home(path):
         part_num = part_num + 1
     return path_list[part_num]
 
+def get_user_name_from_path_via_position(path, username_position_from_end):
+    # position from end includes the filename, this number count does not start at zero (0) but at one (1)
+    new_path = os.path.normpath(path)
+    path_list = new_path.split(os.sep)
+    return path_list.pop(len(path_list) - username_position_from_end)
