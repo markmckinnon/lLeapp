@@ -1113,3 +1113,5 @@ venv/Scripts/pyi-grab_version.exe
 venv/Scripts/pyi-makespec.exe
 venv/Scripts/pyi-set_version.exe
 venv/Scripts/pyinstaller.exe
+dist/lleapp.exe
+dist/lleappGUI.exe
