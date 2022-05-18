@@ -7,17 +7,17 @@
 
 import traceback
 
-from scripts.artifacts.chrome import get_chrome
-from scripts.artifacts.chromeDownloads import get_chromeDownloads
-from scripts.artifacts.chromeCookies import get_chromeCookies
-from scripts.artifacts.chromeAutofill import get_chromeAutofill
-from scripts.artifacts.chromeLoginData import get_chromeLoginData
-from scripts.artifacts.chromeBookmarks import get_chromeBookmarks
-from scripts.artifacts.chromeOmnibox import get_chromeOmnibox
-from scripts.artifacts.chromeSearchTerms import get_chromeSearchTerms
-from scripts.artifacts.chromeTopSites import get_chromeTopSites
-from scripts.artifacts.chromeWebsearch import get_chromeWebsearch
-from scripts.artifacts.chromeNetworkActionPredictor import get_chromeNetworkActionPredictor
+from scripts.artifacts.chromium import get_chrome
+from scripts.artifacts.chromiumDownloads import get_chromeDownloads
+from scripts.artifacts.chromiumCookies import get_chromeCookies
+from scripts.artifacts.chromiumAutofill import get_chromeAutofill
+from scripts.artifacts.chromiumLoginData import get_chromeLoginData
+from scripts.artifacts.chromiumBookmarks import get_chromeBookmarks
+from scripts.artifacts.chromiumOmnibox import get_chromeOmnibox
+from scripts.artifacts.chromiumSearchTerms import get_chromeSearchTerms
+from scripts.artifacts.chromiumTopSites import get_chromeTopSites
+from scripts.artifacts.chromiumWebsearch import get_chromeWebsearch
+from scripts.artifacts.chromiumNetworkActionPredictor import get_chromeNetworkActionPredictor
 from scripts.artifacts.firefox import get_firefox
 from scripts.artifacts.firefoxDownloads import get_firefoxDownloads
 from scripts.artifacts.firefoxCookies import get_firefoxCookies
@@ -28,6 +28,20 @@ from scripts.artifacts.apacheLogs import get_apache_logs
 from scripts.artifacts.aptHistory import get_apt_history_log
 from scripts.artifacts.timezone import get_timezone
 from scripts.artifacts.bashHistory import get_bash_history
+from scripts.artifacts.hostname import get_hostname
+from scripts.artifacts.osinfo import get_osinfo
+from scripts.artifacts.trash import get_trash
+from scripts.artifacts.libraoffice import get_libraOfficeRecentFiles
+from scripts.artifacts.passwd import get_passwd
+from scripts.artifacts.group import get_group
+from scripts.artifacts.shadow import get_shadow
+from scripts.artifacts.dockerconfig import get_docker_config
+from scripts.artifacts.viminfo import get_viminfo
+from scripts.artifacts.mtab import get_mtab
+from scripts.artifacts.fstab import get_fstab
+from scripts.artifacts.mdadm import get_mdadm
+from scripts.artifacts.crontab import get_crontab
+from scripts.artifacts.snap import get_snap
 
 from scripts.lleapfuncs import *
 
@@ -49,20 +63,20 @@ to_search_external_dbs = {
 # These are all the artifacts that need to be processed from a ChromeOs
 tosearch_lLeapp = {
 # Browsers
-    'chrome':('Browser', ('**/mount/user/History*', '**/chronos/LockScreenAppsProfile/History*', '**/chronos/Default/History*', '**/com.brave.browser/app_chrome/Default/History*', '**/com.opera.browser/app_opera/History*')),
-    'chromeDownloads':('Browser', ('**/mount/user/History*', '**/chronos/LockScreenAppsProfile/History*', '**/chronos/Default/History*', '**/com.brave.browser/app_chrome/Default/History*', '**/com.opera.browser/app_opera/History*')),
-    'chromeCookies':('Browser', ('**/mount/user/Cookies*',  '**/chronos/LockScreenAppsProfile/Cookies*', '**/chronos/Default/Cookies*', '**/com.brave.browser/app_chrome/Default/Cookies*', '**/com.opera.browser/app_opera/Cookies*')),
-    'chromeLoginData':('Browser', ('**/mount/user/Login Data*', '**/chronos/LockScreenAppsProfile/Login Data*', '**/chronos/Default/Login Data*', '**/com.brave.browser/app_chrome/Default/Login Data*', '**/com.opera.browser/app_opera/Login Data*')),
-    'chromeAutofill':('Browser', ('**/mount/user/Web Data*', '**/chronos/LockScreenAppsProfile/Web Data*', '**/chronos/Default/Web Data*', '**/com.brave.browser/app_chrome/Default/Web Data*')),
-    'chromeSearchTerms':('Browser', ('**/mount/user/History*', '**/chronos/LockScreenAppsProfile/History*', '**/chronos/Default/History*', '**/com.brave.browser/app_chrome/Default/History*', '**/com.opera.browser/app_opera/History*')),
-    'chromeWebsearch':('Browser', ('**/mount/user/History*', '**/chronos/LockScreenAppsProfile/History*', '**/chronos/Default/History*', '**/com.brave.browser/app_chrome/Default/History*', '**/com.opera.browser/app_opera/History*')),
-    'chromeTopSites':('Browser', ('**/mount/user/Top Sites*', '**/chronos/LockScreenAppsProfile/Top Sites*', '**/chronos/Default/Top Sites*', '**/com.brave.browser/app_chrome/Default/Top Sites*', '**/com.opera.browser/app_opera/Top Sites*')),
-    'chromeNetworkActionPredictor':('Browser', ('*/mount/user/Network Action Predictor*','*/chronos/LockScreenAppsProfile/Network Action Predictor*', '*/chronos/Default/Network Action Predicator*', '**/com.brave.browser/app_chrome/Default/Network Action Predicator*')),
+    'chrome':('Browser', ('**/home/*/.config/google-chrome/default/History*')),
+    'chromeDownloads':('Browser', ('**/home/*/.config/google-chrome/default/History*')),
+    'chromeCookies':('Browser', ('**/home/*/.config/google-chrome/default/Cookies*')),
+    'chromeLoginData':('Browser', ('**/home/*/.config/google-chrome/default/Login Data*')),
+    'chromeAutofill':('Browser', ('**/home/*/.config/google-chrome/default/Web Data*')),
+    'chromeSearchTerms':('Browser', ('**/home/*/.config/google-chrome/default/History*')),
+    'chromeWebsearch':('Browser', ('**/home/*/.config/google-chrome/default/History*')),
+    'chromeTopSites':('Browser', ('**/home/*/.config/google-chrome/default/Top Sites*')),
+    'chromeNetworkActionPredictor':('Browser', ('**/home/*/.config/google-chrome/default/Network Action Predictor*')),
     'chromeOmnibox':('Browser', ('*/mount/user/Shortcuts*','*/chronos/LockScreenAppsProfile/Shortcuts*', '*/chronos/Default/Shortcuts*', '**/com.brave.browser/app_chrome/Default/Shortcuts*')),
     'customDict':('User Settings', '*/mount/user/Custom Dictionary.txt'),
-    'firefox':('Browser', '**/org.mozilla.firefox/files/places.sqlite*'),
-    'firefoxDownloads':('Browser', '**/org.mozilla.firefox/files/places.sqlite*'),
-    'firefoxCookies':('Browser', '**/org.mozilla.firefox/databases/mozac_downloads_database*'),
+    'firefox':('Browser', '**/home/*/.mozilla/firefox/*.default/places.sqlite*'),
+    'firefoxDownloads':('Browser', '**/home/*/.mozilla/firefox/*.default/places.sqlite*'),
+    'firefoxCookies':('Browser', '**/home/*/.mozilla/firefox/*.default/cookies.sqlite*'),
 # Log files
     'wtmp':('Logs', '**/var/logs/wtmp'),
     'btmp': ('Logs', '**/var/logs/btmp'),
@@ -71,7 +85,24 @@ tosearch_lLeapp = {
     'apt_history_log':('APT Logs', '**/var/logs/apt/history.log'),
 # Misc Files
     'timezone': ('Timezone', '**/etc/timezone'),
-    'bash_history':('Bash History', '**/home/*/.bash_history')
+    'hostname': ('Etc Hosts', '**/etc/hostname'),
+    'bash_history':('Bash History', '**/home/*/.bash_history'),
+    'osinfo':('OS Info', '**/usr/lib/os-release', '**/etc/os-release'),
+    'trash':('Trash', '**/home/*/.local/share/Trash/info/**'),
+    'libraOfficeRecentFiles':('Recent Documents', '**/home/*/.config/libreoffice/4/user/registrymodifications.xcu'),
+    'passwd':('Users', '**/etc/passwd'),
+    'group':('Users', '**/etc/group'),
+    'shadow':('Users', '**/etc/shadow'),
+    'viminfo':('Recent Documents', '**/home/*/.viminfo'),
+    'mtab':('Devices', '**/etc/mtab'),
+    'fstab':('Devices', '**/etc/fstab'),
+    'mdadm':('Raids', '**/etc/mdadm/mdadm.conf'),
+    'crontab':('Crontab', ('**/var/spool/cron/crontabs/*/crontab', '**/etc/crontab')),
+    'snap':('Installed Programs', '**/var/lib/snapd/snaps/*'),
+# Docker
+    'docker_config': ('Docker', '**/docker\containers\*\config.v2.json'),
+
+
 }
 
 # This is the order the artifacts must be processed.

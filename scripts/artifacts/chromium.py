@@ -1,5 +1,4 @@
 import os
-import sqlite3
 import textwrap
 
 from scripts.artifact_report import ArtifactHtmlReport

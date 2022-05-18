@@ -1,7 +1,6 @@
 # lLEAPP
-Linux Logs Events and Protobuf Parser
+Linux Logs Events Application Program Parser
 
-Details in blog post here:  xxxxxxx 
 
 ## Requirements
 **Python 3.9 or above** (older versions of 3.x will also work with the exception of one or two modules)

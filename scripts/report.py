@@ -44,11 +44,14 @@ def get_icon_name(category, artifact):
         elif artifact.find('OFFLINE PAGES') >= 0:   icon = 'cloud-off'
         elif artifact.find('AUTOFILL') >= 0:        icon = 'edit-3'
         else:                                       icon = 'chrome'
+    elif category == 'DEVICES':                     icon = 'hard-drive'
     elif category == 'LOGS':     icon = 'book'
     elif category == 'ETC HOSTS':       icon = 'globe'
     elif category == 'INSTALLED APPS':  icon = 'package'
     elif category == 'MEDIA METADATA':  icon = 'file-plus'
+    elif category == 'RECENT DOCUMENTS': icon = 'file-text'
     elif category == 'TIMEZONE':        icon = 'clock'
+    elif category == 'TRASH':           icon = 'trash-2'
     return icon
     
 def generate_report(reportfolderbase, time_in_secs, time_HMS, extraction_type, image_input_path):
@@ -133,6 +136,10 @@ def generate_report(reportfolderbase, time_in_secs, time_HMS, extraction_type, i
     shutil.copy2(os.path.join(__location__,"dark-mode-switch.js"), elements_folder)
     shutil.copytree(os.path.join(__location__,"MDB-Free_4.13.0"), os.path.join(elements_folder, 'MDB-Free_4.13.0'))
 
+    #Copies custom.css & sidebard.js files to local directory
+    shutil.copyfile(os.path.join(__location__, "custom.css"), os.path.join(elements_folder, "custom.css"))
+    shutil.copyfile(os.path.join(__location__, "sidebar.js"), os.path.join(elements_folder, "sidebar.js"))
+
 def get_file_content(path):
     f = open(path, 'r', encoding='utf8')
     data = f.read()
@@ -181,7 +188,7 @@ def create_index_html(reportfolderbase, time_in_secs, time_HMS, extraction_type,
     # WRITE INDEX.HTML LAST
     filename = 'index.html'
     page_title = 'lLEAPP Report'
-    body_heading = 'Linux Logs Events And Parsers'
+    body_heading = 'Linux Logs Events Application Program Parser'
     body_description = 'LLEAPP is an open source project that aims to parse every known Linux artifact for the purpose of forensic analysis.'
     active_nav_list_data = mark_item_active(nav_list_data, filename) + nav_bar_script
 
