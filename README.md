@@ -1,5 +1,5 @@
 # lLEAPP
-Linux Logs Events APplication Parser
+Linux Logs Events Application Program Parser
 
 
 ## Requirements

@@ -41,6 +41,7 @@ from scripts.artifacts.mtab import get_mtab
 from scripts.artifacts.fstab import get_fstab
 from scripts.artifacts.mdadm import get_mdadm
 from scripts.artifacts.crontab import get_crontab
+from scripts.artifacts.snap import get_snap
 
 from scripts.lleapfuncs import *
 
@@ -97,6 +98,7 @@ tosearch_lLeapp = {
     'fstab':('Devices', '**/etc/fstab'),
     'mdadm':('Raids', '**/etc/mdadm/mdadm.conf'),
     'crontab':('Crontab', ('**/var/spool/cron/crontabs/*/crontab', '**/etc/crontab')),
+    'snap':('Installed Programs', '**/var/lib/snapd/snaps/*'),
 # Docker
     'docker_config': ('Docker', '**/docker\containers\*\config.v2.json'),
 

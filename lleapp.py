@@ -8,7 +8,7 @@ from scripts.version_info import lleapp_version
 from time import process_time, gmtime, strftime
 
 def main():
-    parser = argparse.ArgumentParser(description='LLEAPP: Linux Logs, Events, and Protobuf Parser.')
+    parser = argparse.ArgumentParser(description='LLEAPP: Linux Logs, Events, Application Program Parser.')
     parser.add_argument('-t', choices=['fs','tar','zip', 'gz', 'tgz'], required=False, type=str.lower, action="store", help="Input type (fs = extracted to file system folder)")
     parser.add_argument('-o', '--output_path', required=False, action="store", help='Output folder path')
     parser.add_argument('-i', '--input_path', required=False, action="store", help='Path to input file/folder')
@@ -81,7 +81,7 @@ def crunch_artifacts(search_list, extracttype, input_path, out_params, ratio, wr
     logfunc('Processing started. Please wait. This may take a few minutes...')
 
     logfunc('\n--------------------------------------------------------------------------------------')
-    logfunc(f'LLEAPP v{lleapp_version}: Linux Logs, Events, and Protobuf Parser')
+    logfunc(f'LLEAPP v{lleapp_version}: Linux Logs, Events, Application Program Parser')
     logfunc('Objective: Triage Linux Image Extractions.')
     logfunc('By: Mark McKinnon | @markmckinnon')
     logfunc('By: Alexis Brignoni | @AlexisBrignoni | abrignoni.com ')
