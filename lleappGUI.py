@@ -81,7 +81,7 @@ pickModules()
 GuiWindow.progress_bar_total = len(lleapp.tosearch)
 
 
-layout = [  [sg.Text('Linux Logs, Events, And Protobuf Parser', font=("Helvetica", 22))],
+layout = [  [sg.Text('Linux Logs, Events, Application, Program Parser', font=("Helvetica", 22))],
             [sg.Text('https://github.com/markmckinnon/lLEAPP', font=("Helvetica", 14))],
             [sg.Frame(layout=[
                     [sg.Input(size=(97,1)), 
