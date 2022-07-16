@@ -60,3 +60,10 @@ def get_chrome(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} {identifier} data available')
         
         db.close()
+
+__artifacts__ = {
+        "chrome": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/History*'),
+                get_chrome)
+}

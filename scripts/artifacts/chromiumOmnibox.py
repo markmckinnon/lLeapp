@@ -64,3 +64,10 @@ def get_chromeOmnibox(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} Omnibox data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeOmnibox": (
+                "Browser",
+                ('**/.config/google-chrome/Default/Shortcuts*'),
+                get_chromeOmnibox)
+}

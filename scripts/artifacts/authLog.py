@@ -129,3 +129,10 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
             timeline(report_folder, tlactivity, failed_data_list, data_headers)
         else:
             logfunc(f'No auth_log FAILED data available')
+
+__artifacts__ = {
+        "auth_log": (
+                "Logs",
+                ('**/var/logs/auth.log'),
+                get_auth_log)
+}

@@ -69,3 +69,10 @@ def get_trash(files_found, report_folder, seeker, wrap_text):
             
     else:
         logfunc(f'No trash data available')
+
+__artifacts__ = {
+        "trash": (
+                "Trash",
+                ('**/home/*/.local/share/Trash/info/**'),
+                get_trash)
+}

@@ -48,3 +48,10 @@ def get_mdadm(files_found, report_folder, seeker, wrap_text):
 
     else:
         logfunc(f'No mdadm arrays data available')
+
+__artifacts__ = {
+        "mdadm": (
+                "Raids",
+                ('**/etc/mdadm/mdadm.conf'),
+                get_mdadm)
+}

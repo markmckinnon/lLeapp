@@ -85,3 +85,10 @@ def get_chromeCookies(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} cookies data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeCookies": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/Cookies*'),
+                get_chromeCookies)
+}

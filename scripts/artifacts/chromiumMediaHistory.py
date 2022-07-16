@@ -136,3 +136,10 @@ def get_chromeMediaHistory(files_found, report_folder, seeker, wrap_text):
         
         db.close()
         return
+
+__artifacts__ = {
+        "chromeMediaHistory": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/Media History*'),
+                get_chromeMediaHistory)
+}

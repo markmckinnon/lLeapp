@@ -46,4 +46,9 @@ def get_chromeSync(files_found, report_folder, seeker, wrap_text):
         
         db.close()
         
-    
+__artifacts__ = {
+        "chromeSync": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/chromesync.data_store*'),
+                get_chromeSync)
+}

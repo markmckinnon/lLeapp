@@ -37,3 +37,10 @@ def get_mtab(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No mounted devices data available')
+
+__artifacts__ = {
+        "mtab": (
+                "Devices",
+                ('**/etc/mtab'),
+                get_mtab)
+}

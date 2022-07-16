@@ -59,3 +59,10 @@ def get_viminfo(files_found, report_folder, seeker, wrap_text):
 
         else:
             logfunc(f'No vim edited files data available')
+
+__artifacts__ = {
+        "viminfo": (
+                "Recent Documents",
+                ('**/home/*/.viminfo'),
+                get_viminfo)
+}

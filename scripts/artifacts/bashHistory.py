@@ -36,3 +36,10 @@ def get_bash_history(files_found, report_folder, seeker, wrap_text):
             
         else:
             logfunc(f'No bash history data for {user_name}available')
+
+__artifacts__ = {
+        "bash_history": (
+                "Bash History",
+                ('**/home/*/.bash_history'),
+                get_bash_history)
+}

@@ -57,3 +57,10 @@ def get_chromeBookmarks(files_found, report_folder, seeker, wrap_text):
             timeline(report_folder, tlactivity, data_list, data_headers)
         else:
             logfunc('No Browser Bookmarks data available')
+
+__artifacts__ = {
+        "chrome_bookmarks": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/Bookmarks*'),
+                get_chromeBookmarks)
+}

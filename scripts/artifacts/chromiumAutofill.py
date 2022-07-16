@@ -56,3 +56,10 @@ def get_chromeAutofill(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} Autofill data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeAutofill": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/Web Data*'),
+                get_chromeAutofill)
+}

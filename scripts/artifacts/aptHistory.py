@@ -107,3 +107,11 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
             timeline(report_folder, tlactivity, data_removed_programs_list, data_headers)
         else:
             logfunc(f'No apt_programs_removed_log data available')
+
+
+__artifacts__ = {
+        "apt_history_log": (
+                "APT Logs",
+                ('**/var/logs/apt/history.log'),
+                get_apt_history_log)
+}

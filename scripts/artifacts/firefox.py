@@ -82,3 +82,10 @@ def get_firefox(files_found, report_folder, seeker, wrap_text):
             logfunc('No Firefox history data available')
         
         db.close()
+
+__artifacts__ = {
+        "firefox": (
+                "Browser",
+                ('**/home/*/.mozilla/firefox/*.default/places.sqlite*'),
+                get_firefox)
+}

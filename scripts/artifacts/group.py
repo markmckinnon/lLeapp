@@ -37,3 +37,10 @@ def get_group(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No group data available')
+
+__artifacts__ = {
+        "group": (
+                "Users",
+                ('**/etc/group'),
+                get_group)
+}

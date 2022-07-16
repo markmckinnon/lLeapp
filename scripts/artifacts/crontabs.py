@@ -50,3 +50,12 @@ def get_crontab(files_found, report_folder, seeker, wrap_text):
 
         else:
             logfunc(f'No {username} crontab data available')
+
+
+__artifacts__ = {
+        "crontabs": (
+                "Crontab",
+                ('**/var/spool/cron/crontabs/*/crontab', '**/etc/crontab'),
+                get_crontab)
+}
+
