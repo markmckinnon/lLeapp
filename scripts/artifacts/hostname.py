@@ -37,3 +37,10 @@ def get_hostname(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No hostname data available')
+
+__artifacts__ = {
+        "hostname": (
+                "Etc Hosts",
+                ('**/etc/hostname'),
+                get_hostname)
+}

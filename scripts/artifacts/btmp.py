@@ -45,3 +45,11 @@ def get_btmp(files_found, report_folder, seeker, wrap_text):
             timeline(report_folder, tlactivity, data_list, data_headers)
         else:
             logfunc(f'No btmp data available')
+
+__artifacts__ = {
+        "btmp": (
+                "Logs",
+                ('**/var/logs/btmp'),
+                get_btmp)
+}
+

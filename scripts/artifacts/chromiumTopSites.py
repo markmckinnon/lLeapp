@@ -55,3 +55,10 @@ def get_chromeTopSites(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} Top Sites data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeTopSites": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/Top Sites*'),
+                get_chromeTopSites)
+}

@@ -46,3 +46,10 @@ def get_firefoxCookies(files_found, report_folder, seeker, wrap_text):
             logfunc('No Firefox cookies data available')
         
         db.close()
+
+__artifacts__ = {
+        "firefoxCookies": (
+                "Browser",
+                ('**/home/*/.mozilla/firefox/*.default/cookies.sqlite*'),
+                get_firefoxCookies)
+}

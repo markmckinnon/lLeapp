@@ -61,3 +61,10 @@ def get_chromeWebsearch(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} web search terms data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeWebsearch": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/History*'),
+                get_chromeWebsearch)
+}

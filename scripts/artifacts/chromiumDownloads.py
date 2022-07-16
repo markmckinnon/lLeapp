@@ -75,3 +75,10 @@ def get_chromeDownloads(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} download data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeDownloads": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/History*'),
+                get_chromeDownloads)
+}

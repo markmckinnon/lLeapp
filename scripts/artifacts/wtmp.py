@@ -47,3 +47,10 @@ def get_wtmp(files_found, report_folder, seeker, wrap_text):
             timeline(report_folder, tlactivity, data_list, data_headers)
         else:
             logfunc(f'No wtmp data available')
+
+__artifacts__ = {
+        "wtmp": (
+                "Logs",
+                ('**/var/logs/wtmp'),
+                get_wtmp)
+}

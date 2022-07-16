@@ -42,3 +42,10 @@ def get_libraOfficeRecentFiles(files_found, report_folder, seeker, wrap_text):
             
         else:
             logfunc(f'No libraOffice recent Document data available')
+
+__artifacts__ = {
+        "libraoffice": (
+                "Recent Documents",
+                ('**/home/*/.config/libreoffice/4/user/registrymodifications.xcu'),
+                get_libraOfficeRecentFiles)
+}

@@ -37,3 +37,10 @@ def get_timezone(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No Timezone data available')
+
+__artifacts__ = {
+        "timezone": (
+                "Timezone",
+                ('**/etc/timezone'),
+                get_timezone)
+}

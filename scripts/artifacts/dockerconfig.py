@@ -66,3 +66,10 @@ def get_docker_config(files_found, report_folder, seeker, wrap_text):
 
     else:
         logfunc(f'No libraOffice recent Document data available')
+
+__artifacts__ = {
+        "docker_config": (
+                "Docker",
+                ('**/docker\containers\*\config.v2.json'),
+                get_docker_config)
+}

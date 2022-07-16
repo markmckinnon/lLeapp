@@ -37,3 +37,10 @@ def get_osinfo(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No osname data available')
+
+__artifacts__ = {
+        "osInfo": (
+                "OS Info",
+                ('**/usr/lib/os-release', '**/etc/os-release'),
+                get_osinfo)
+}

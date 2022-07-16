@@ -194,3 +194,10 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
         else:
             logfunc(f'No apache_method_bytes data available')
 
+
+__artifacts__ = {
+        "apache_logs": (
+                "Apache Logs",
+                ('**/var/logs/apache2/access.log'),
+                get_apache_logs)
+}

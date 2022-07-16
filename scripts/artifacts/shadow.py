@@ -55,3 +55,10 @@ def get_shadow(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No shadow data available')
+
+__artifacts__ = {
+        "shadow": (
+                "Users",
+                ('**/etc/shadow'),
+                get_shadow)
+}

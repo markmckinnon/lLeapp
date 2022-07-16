@@ -59,3 +59,10 @@ def get_chromeSearchTerms(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} keyword search terms data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeSearchTerems": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/History*'),
+                get_chromeSearchTerms)
+}

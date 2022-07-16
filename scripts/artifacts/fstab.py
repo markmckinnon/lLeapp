@@ -40,3 +40,11 @@ def get_fstab(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No file system table data available')
+
+__artifacts__ = {
+        "fstab": (
+                "Devices",
+                ('**/etc/fstab'),
+                get_fstab)
+}
+

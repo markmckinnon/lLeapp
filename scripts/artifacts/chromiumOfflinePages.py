@@ -59,3 +59,10 @@ def get_chromeOfflinePages(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} Offline Pages data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeOffinePages": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/Offline Pages/metadata/OfflinePages.db*'),
+                get_chromeOfflinePages)
+}

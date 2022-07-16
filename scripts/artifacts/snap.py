@@ -35,3 +35,10 @@ def get_snap(files_found, report_folder, seeker, wrap_text):
 
     else:
         logfunc(f'No snap package data available')
+
+__artifacts__ = {
+        "snap": (
+                "Installed Programs",
+                ('**/var/lib/snapd/snaps/*'),
+                get_snap)
+}

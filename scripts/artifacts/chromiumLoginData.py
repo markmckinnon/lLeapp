@@ -106,3 +106,10 @@ def get_chromeLoginData(files_found, report_folder, seeker, wrap_text):
             logfunc(f'No {browser_name} Login Data available')
         
         db.close()
+
+__artifacts__ = {
+        "chromeLoginData": (
+                "Browser",
+                ('**/home/*/.config/google-chrome/default/Login Data*'),
+                get_chromeLoginData)
+}

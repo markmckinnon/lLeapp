@@ -1,14 +1,17 @@
+import typing
 import lleapp
 import os
 import PySimpleGUI as sg
 import sys
 import webbrowser
+import plugin_loader
 
 from scripts.lleapfuncs import *
 from scripts.version_info import lleapp_version
 from time import process_time, gmtime, strftime
-from scripts.lleap_artifacts import *
 from scripts.search_files import *
+
+MODULE_START_INDEX = 1000
 
 def ValidateInput(values, window):
     '''Returns tuple (success, extraction_type)'''
@@ -60,25 +63,25 @@ def CheckList(mtxt, lkey, mdstring, disable=False):
 def pickModules():
     global indx
     global mlist
-    
-    script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'scripts', 'artifacts')
+    global loader
 
-    # Create sorted dict from 'tosearch' dictionary based on plugin category
-    sorted_tosearch = {k: v for k, v in sorted(tosearch.items(), key=lambda item: item[1][0])}
+    loader = plugin_loader.PluginLoader()
 
-    indx = 1000     # arbitrary number to not interfere with other controls
-    for key, val in sorted_tosearch.items():
-        mlist.append( CheckList(val[0] + f' [{key}]', indx, key) )
+    indx = MODULE_START_INDEX  # arbitrary number to not interfere with other controls
+    for plugin in sorted(loader.plugins, key=lambda p: p.category.upper()):
+        disabled = plugin.module_name == 'osinfo'
+        mlist.append(CheckList(f'{plugin.category} [{plugin.name} - {plugin.module_name}.py]', indx, plugin.name, disabled))
         indx = indx + 1
         
 sg.theme('DarkTeal9')   # Add a touch of color
 # All the stuff inside your window.
 
 normal_font = ("Helvetica", 12)
+loader: typing.Optional[plugin_loader.PluginLoader] = None
 mlist = []
 # go through list of available modules and confirm they exist on the disk
 pickModules()
-GuiWindow.progress_bar_total = len(lleapp.tosearch)
+GuiWindow.progress_bar_total = len(loader)
 
 
 layout = [  [sg.Text('Linux Logs, Events, Application, Program Parser', font=("Helvetica", 22))],
@@ -113,12 +116,12 @@ while True:
 
     if event == "SELECT ALL":  
         # mark all modules
-        for x in range(1000,indx):
+        for x in range(MODULE_START_INDEX, indx):
             window[x].Update(True)
     if event == "DESELECT ALL":  
          # none modules
-        for x in range(1000,indx):
-            window[x].Update(False) 
+        for x in range(MODULE_START_INDEX, indx):
+            window[x].Update(False if window[x].metadata != 'osinfo' else True)  # oosinfo.py is REQUIRED
     if event == 'Process':
         #check is selections made properly; if not we will return to input form without exiting app altogether
         is_valid, extracttype = ValidateInput(values, window)
@@ -134,14 +137,15 @@ while True:
                 if output_folder[1] == ':': output_folder = '\\\\?\\' + output_folder.replace('/', '\\')
             
             # re-create modules list based on user selection
-            search_list = {}
+            search_list = [loader['osInfo']]  # hardcode usagestatsVersion as first item
             s_items = 0
-            for x in range(1000,indx):
+            for x in range(MODULE_START_INDEX, indx):
                 if window.FindElement(x).Get():
-                    if window[x].metadata in tosearch:
-                        search_list[window[x].metadata] = tosearch[window[x].metadata]
-                        s_items = s_items + 1 #for progress bar
-                
+                    key = window[x].metadata
+                    if key in loader and key != 'osInfo':
+                        search_list.append(loader[key])
+                    s_items = s_items + 1 # for progress bar
+
             # no more selections allowed
             window[x].Update(disabled = True)
                 
@@ -151,7 +155,7 @@ while True:
             GuiWindow.window_handle = window
             out_params = OutputParameters(output_folder)
             wrap_text = True
-            crunch_successful = lleapp.crunch_artifacts(search_list, extracttype, input_path, out_params, len(lleapp.tosearch)/s_items, wrap_text)
+            crunch_successful = lleapp.crunch_artifacts(search_list, extracttype, input_path, out_params, len(loader)/s_items, wrap_text)
             if crunch_successful:
                 report_path = os.path.join(out_params.report_folder_base, 'index.html')
                     

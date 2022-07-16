@@ -45,3 +45,10 @@ def get_firefoxDownloads(files_found, report_folder, seeker, wrap_text):
             logfunc('No Firefox download data available')
         
         db.close()
+
+__artifacts__ = {
+        "firefoxDownloads": (
+                "Browser",
+                ('**/home/*/.mozilla/firefox/*.default/places.sqlite*'),
+                get_firefoxDownloads)
+}

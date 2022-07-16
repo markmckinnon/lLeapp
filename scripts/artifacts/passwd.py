@@ -61,3 +61,10 @@ def get_passwd(files_found, report_folder, seeker, wrap_text):
 
             else:
                 logfunc(f'No UID_0 data available')
+
+__artifacts__ = {
+        "passwd": (
+                "Users",
+                ('**/etc/passwd'),
+                get_passwd)
+}
