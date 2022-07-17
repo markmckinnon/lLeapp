@@ -20,5 +20,6 @@ for py_file in plugin_loader.PLUGINPATH.glob("*.py"):
     tmp.append("scripts.artifacts." + mod.__name__)  # TODO this is a hack, if we ever move plugins this breaks
 
 print(f"{len(tmp)} plugins loaded as hidden imports")
+print (list(tmp))
 
 hiddenimports = list(tmp)

@@ -59,6 +59,6 @@ def get_chromeTopSites(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeTopSites": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/Top Sites*'),
+                ('**/home/*/.config/google-chrome/default/Top Sites*', '**/home/*/.config/google-chrome/Profile*/Top Sites*'),
                 get_chromeTopSites)
 }

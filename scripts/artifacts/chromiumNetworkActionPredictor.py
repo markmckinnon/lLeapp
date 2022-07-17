@@ -58,6 +58,6 @@ def get_chromeNetworkActionPredictor(files_found, report_folder, seeker, wrap_te
 __artifacts__ = {
         "chromeNetworkActionPredictor": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/Network Action Predictor*'),
+                ('**/home/*/.config/google-chrome/default/Network Action Predictor*', '**/home/*/.config/google-chrome/Profile*/Network Action Predictor*'),
                 get_chromeNetworkActionPredictor)
 }

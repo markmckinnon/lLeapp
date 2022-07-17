@@ -65,6 +65,6 @@ def get_chromeWebsearch(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeWebsearch": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/History*'),
+                ('**/home/*/.config/google-chrome/default/History*', '**/home/*/.config/google-chrome/Profile*/History*'),
                 get_chromeWebsearch)
 }

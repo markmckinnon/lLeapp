@@ -110,6 +110,6 @@ def get_chromeLoginData(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeLoginData": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/Login Data*'),
+                ('**/home/*/.config/google-chrome/default/Login Data*', '**/home/*/.config/google-chrome/Profile*/Login Data*'),
                 get_chromeLoginData)
 }

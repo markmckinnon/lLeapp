@@ -61,6 +61,6 @@ def get_chromeBookmarks(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chrome_bookmarks": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/Bookmarks*'),
+                ('**/home/*/.config/google-chrome/default/Bookmarks*', '**/home/*/.config/google-chrome/Profile*/Bookmarks*'),
                 get_chromeBookmarks)
 }
