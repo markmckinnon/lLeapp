@@ -89,6 +89,6 @@ def get_chromeCookies(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeCookies": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/Cookies*'),
+                ('**/home/*/.config/google-chrome/default/Cookies*', '**/home/*/.config/google-chrome/Profile*/Cookies*'),
                 get_chromeCookies)
 }

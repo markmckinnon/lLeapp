@@ -64,6 +64,6 @@ def get_chrome(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chrome": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/History*'),
+                ('**/home/*/.config/google-chrome/default/History*', '**/home/*/.config/google-chrome/Profile*/History*'),
                 get_chrome)
 }

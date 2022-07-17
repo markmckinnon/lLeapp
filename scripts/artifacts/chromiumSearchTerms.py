@@ -61,8 +61,8 @@ def get_chromeSearchTerms(files_found, report_folder, seeker, wrap_text):
         db.close()
 
 __artifacts__ = {
-        "chromeSearchTerems": (
+        "chromeSearchTerms": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/History*'),
+                ('**/home/*/.config/google-chrome/default/History*', '**/home/*/.config/google-chrome/Profile*/History*'),
                 get_chromeSearchTerms)
 }

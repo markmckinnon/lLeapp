@@ -79,6 +79,6 @@ def get_chromeDownloads(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeDownloads": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/History*'),
+                ('**/home/*/.config/google-chrome/default/History*', '**/home/*/.config/google-chrome/Profile*/History*'),
                 get_chromeDownloads)
 }

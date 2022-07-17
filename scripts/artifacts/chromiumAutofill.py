@@ -60,6 +60,6 @@ def get_chromeAutofill(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeAutofill": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/Web Data*'),
+                ('**/home/*/.config/google-chrome/default/Web Data*', '**/home/*/.config/google-chrome/Profile*/Web Data*'),
                 get_chromeAutofill)
 }

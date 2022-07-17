@@ -63,6 +63,6 @@ def get_chromeOfflinePages(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeOffinePages": (
                 "Browser",
-                ('**/home/*/.config/google-chrome/default/Offline Pages/metadata/OfflinePages.db*'),
+                ('**/home/*/.config/google-chrome/default/Offline Pages/metadata/OfflinePages.db*', '**/home/*/.config/google-chrome/default/Offline Pages/Profile*/OfflinePages.db*'),
                 get_chromeOfflinePages)
 }

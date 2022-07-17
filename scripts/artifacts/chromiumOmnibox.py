@@ -68,6 +68,6 @@ def get_chromeOmnibox(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "chromeOmnibox": (
                 "Browser",
-                ('**/.config/google-chrome/Default/Shortcuts*'),
+                ('**/.config/google-chrome/Default/Shortcuts*', '**/.config/google-chrome/Profile*/Shortcuts*'),
                 get_chromeOmnibox)
 }
