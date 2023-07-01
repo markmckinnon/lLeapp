@@ -49,6 +49,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
                 temp_data_list.append(process)
                 temp_data_list.append(xtype)
                 temp_data_list.append(message)
+                temp_data_list.append(file_found)
                 data_list.append(temp_data_list)
 
                 if 'sudo' in process:
@@ -56,6 +57,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
                         sudo_temp_data_list.append(timestamp)
                         sudo_temp_data_list.append(host)
                         sudo_temp_data_list.append(xtype)
+                        sudo_temp_data_list.append(file_found)
                         for sudo_data in message.split(' ; '):
                             sudo_temp_data_list.append(sudo_data)
                         sudo_data_list.append(sudo_temp_data_list)
@@ -65,6 +67,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
                     failed_temp_data_list.append(host)
                     failed_temp_data_list.append(process)
                     failed_temp_data_list.append(message)
+                    failed_temp_data_list.append(file_found)
                     failed_data_list.append(failed_temp_data_list)
 
         usageentries = len(data_list)
@@ -75,7 +78,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('timestamp', 'host', 'process', 'type', 'message')
+            data_headers = ('timestamp', 'host', 'process', 'type', 'message', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
@@ -96,7 +99,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('timestamp', 'host', 'user', 'terminal', 'print_working_directory', 'run_as', 'command')
+            data_headers = ('timestamp', 'host', 'user', 'terminal', 'print_working_directory', 'run_as', 'command', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, sudo_data_list, file_found)
             report.end_artifact_report()
@@ -117,7 +120,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('timestamp', 'host', 'process', 'message')
+            data_headers = ('timestamp', 'host', 'process', 'message', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, failed_data_list, file_found)
             report.end_artifact_report()

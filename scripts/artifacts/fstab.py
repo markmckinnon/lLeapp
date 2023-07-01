@@ -20,7 +20,7 @@ def get_fstab(files_found, report_folder, seeker, wrap_text):
                     else:
                         fstab_list = line.split()
                         if len(fstab_list) == 6:
-                            data_list.append((fstab_list[0], fstab_list[1], fstab_list[2], fstab_list[3], fstab_list[4], fstab_list[5]))
+                            data_list.append((fstab_list[0], fstab_list[1], fstab_list[2], fstab_list[3], fstab_list[4], fstab_list[5], file_found))
 
             usageentries = len(data_list)
             if usageentries > 0:
@@ -30,7 +30,7 @@ def get_fstab(files_found, report_folder, seeker, wrap_text):
                 report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
                 report.start_artifact_report(report_folder, os.path.basename(report_path))
                 report.add_script()
-                data_headers = ('device_name', 'mount_point', 'filesystem_type', 'mounting_options', 'mount_freq', 'mnt_passno')
+                data_headers = ('device_name', 'mount_point', 'filesystem_type', 'mounting_options', 'mount_freq', 'mnt_passno', 'sourcefile')
 
                 report.write_artifact_data_table(data_headers, data_list, file_found)
                 report.end_artifact_report()

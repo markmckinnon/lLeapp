@@ -1,7 +1,8 @@
 import os
 import sqlite3
 from scripts.artifact_report import ArtifactHtmlReport
-from scripts.lleapfuncs import logfunc, tsv, timeline, is_platform_windows, get_next_unused_name, open_sqlite_db_readonly, get_browser_name
+from scripts.lleapfuncs import logfunc, tsv, timeline, is_platform_windows, get_next_unused_name, \
+    open_sqlite_db_readonly, get_browser_name, get_user_name_from_home
 
 def get_chromeMediaHistory(files_found, report_folder, seeker, wrap_text):
 
@@ -16,6 +17,8 @@ def get_chromeMediaHistory(files_found, report_folder, seeker, wrap_text):
         elif file_found.find('.magisk') >= 0 and file_found.find('mirror') >= 0:
             continue # Skip sbin/.magisk/mirror/data/.. , it should be duplicate data??
         
+        user_name = get_user_name_from_home(file_found)
+
         db = open_sqlite_db_readonly(file_found)
         cursor = db.cursor()
         cursor.execute('''
@@ -35,16 +38,16 @@ def get_chromeMediaHistory(files_found, report_folder, seeker, wrap_text):
         all_rows = cursor.fetchall()
         usageentries = len(all_rows)
         if usageentries > 0:
-            report = ArtifactHtmlReport(f'{browser_name} Media History - Sessions')
+            report = ArtifactHtmlReport(f'{browser_name} Media History - Sessions - {user_name}')
             #check for existing and get next name for report file, so report from another file does not get overwritten
             report_path = os.path.join(report_folder, f'{browser_name} Media History - Sessions.temphtml')
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('Last Updated','Origin ID','URL','Position','Duration','Title','Artist','Album','Source Title') # Don't remove the comma, that is required to make this a tuple as there is only 1 element
+            data_headers = ('Last Updated','Origin ID','URL','Position','Duration','Title','Artist','Album','Source Title', 'username', 'sourcefile') # Don't remove the comma, that is required to make this a tuple as there is only 1 element
             data_list = []
             for row in all_rows:
-                data_list.append((row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]))
+                data_list.append((row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8], user_name, file_found))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
@@ -78,16 +81,16 @@ def get_chromeMediaHistory(files_found, report_folder, seeker, wrap_text):
         all_rows = cursor.fetchall()
         usageentries = len(all_rows)
         if usageentries > 0:
-            report = ArtifactHtmlReport(f'{browser_name} Media History - Playbacks')
+            report = ArtifactHtmlReport(f'{browser_name} Media History - Playbacks - {user_name}')
             #check for existing and get next name for report file, so report from another file does not get overwritten
             report_path = os.path.join(report_folder, f'{browser_name} Media History - Playbacks.temphtml')
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('Last Updated','ID','Origin ID','URL','Watch Time','Has Audio','Has Video') # Don't remove the comma, that is required to make this a tuple as there is only 1 element
+            data_headers = ('Last Updated','ID','Origin ID','URL','Watch Time','Has Audio','Has Video', 'username', 'sourcefile') # Don't remove the comma, that is required to make this a tuple as there is only 1 element
             data_list = []
             for row in all_rows:
-                data_list.append((row[0],row[1],row[2],row[3],row[4],row[5],row[6]))
+                data_list.append((row[0],row[1],row[2],row[3],row[4],row[5],row[6], user_name, file_found))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
@@ -112,16 +115,16 @@ def get_chromeMediaHistory(files_found, report_folder, seeker, wrap_text):
         all_rows = cursor.fetchall()
         usageentries = len(all_rows)
         if usageentries > 0:
-            report = ArtifactHtmlReport(f'{browser_name} Media History - Origins')
+            report = ArtifactHtmlReport(f'{browser_name} Media History - Origins - {user_name}')
             #check for existing and get next name for report file, so report from another file does not get overwritten
-            report_path = os.path.join(report_folder, f'{browser_name} Media History - Origins.temphtml')
+            report_path = os.path.join(report_folder, f'{browser_name} Media History - Origins - {user_name}.temphtml')
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('Last Updated','ID','Origin','Aggregate Watchtime') # Don't remove the comma, that is required to make this a tuple as there is only 1 element
+            data_headers = ('Last Updated','ID','Origin','Aggregate Watchtime', 'username','sourcefile') # Don't remove the comma, that is required to make this a tuple as there is only 1 element
             data_list = []
             for row in all_rows:
-                data_list.append((row[0],row[1],row[2],row[3]))
+                data_list.append((row[0],row[1],row[2],row[3], user_name, file_found))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

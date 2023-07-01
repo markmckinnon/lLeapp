@@ -8,7 +8,7 @@ from scripts.lleapfuncs import logfunc, tsv, get_next_unused_name
 def get_mdadm(files_found, report_folder, seeker, wrap_text):
 
     data_list = []
-    data_headers = ['array', 'device_name']
+    data_headers = ['array', 'device_name', 'sourcefile']
     for file_found in files_found:
         file_found = str(file_found)
         with open(file_found, 'r', encoding='utf-8') as f:
@@ -29,6 +29,7 @@ def get_mdadm(files_found, report_folder, seeker, wrap_text):
                             data_headers.append(item_list[0])
                             col_num = data_headers.index(item_list[0])
                             temp_data_list.insert(col_num, item_list[1])
+                temp_data_list.append(file_found)
                 data_list.append(temp_data_list)
 
     usageentries = len(data_list)

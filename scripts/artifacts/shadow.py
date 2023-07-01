@@ -34,7 +34,7 @@ def get_shadow(files_found, report_folder, seeker, wrap_text):
                     temp_data_list.append(line_data[5])
                     temp_data_list.append(line_data[6])
                     temp_data_list.append(line_data[7])
-
+                    temp_data_list.append(file_found)
                     data_list.append(temp_data_list)
 
             usageentries = len(data_list)
@@ -45,7 +45,7 @@ def get_shadow(files_found, report_folder, seeker, wrap_text):
                 report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
                 report.start_artifact_report(report_folder, os.path.basename(report_path))
                 report.add_script()
-                data_headers = ('username', 'passwd_algorithm', 'passwd_salt', 'passwd_hashed', 'last_changed_epoch', 'minimum_passwd_change', 'maximum_passwd_change', 'warn', 'inactive', 'expiration_date_epoch')
+                data_headers = ('username', 'passwd_algorithm', 'passwd_salt', 'passwd_hashed', 'last_changed_epoch', 'minimum_passwd_change', 'maximum_passwd_change', 'warn', 'inactive', 'expiration_date_epoch', 'sourcefile')
 
                 report.write_artifact_data_table(data_headers, data_list, file_found)
                 report.end_artifact_report()

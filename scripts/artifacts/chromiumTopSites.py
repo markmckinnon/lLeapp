@@ -2,7 +2,8 @@ import os
 import sqlite3
 
 from scripts.artifact_report import ArtifactHtmlReport
-from scripts.lleapfuncs import logfunc, tsv, is_platform_windows, get_next_unused_name, open_sqlite_db_readonly, get_browser_name
+from scripts.lleapfuncs import logfunc, tsv, is_platform_windows, get_next_unused_name, \
+    open_sqlite_db_readonly, get_browser_name, get_user_name_from_home
 
 def get_chromeTopSites(files_found, report_folder, seeker, wrap_text):
     
@@ -15,6 +16,8 @@ def get_chromeTopSites(files_found, report_folder, seeker, wrap_text):
             browser_name = 'Browser'
         elif file_found.find('.magisk') >= 0 and file_found.find('mirror') >= 0:
             continue # Skip sbin/.magisk/mirror/data/.. , it should be duplicate data??
+
+        user_name = get_user_name_from_home(file_found)
 
         db = open_sqlite_db_readonly(file_found)
         cursor = db.cursor()
@@ -35,16 +38,16 @@ def get_chromeTopSites(files_found, report_folder, seeker, wrap_text):
             usageentries = 0
             
         if usageentries > 0:
-            report = ArtifactHtmlReport(f'{browser_name} Top Sites')
+            report = ArtifactHtmlReport(f'{browser_name} Top Sites - {user_name}')
             #check for existing and get next name for report file, so report from another file does not get overwritten
-            report_path = os.path.join(report_folder, f'{browser_name} Top Sites.temphtml')
+            report_path = os.path.join(report_folder, f'{browser_name} Top Sites - {user_name}.temphtml')
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('URL','Rank','Title','Redirects')
+            data_headers = ('URL','Rank','Title','Redirects', 'username', 'sourcefile')
             data_list = []
             for row in all_rows:
-                data_list.append((row[0],row[1],row[2],row[3]))
+                data_list.append((row[0],row[1],row[2],row[3],user_name, file_found))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

@@ -21,6 +21,8 @@ def get_passwd(files_found, report_folder, seeker, wrap_text):
                         temp_data_list.append(column)
                     if column_data[2] == '0':
                         data_list_uid_0.append([column_data[0]])
+                        data_list_uid_0.append(file_found)
+                    temp_data_list.append(file_found)
                     data_list.append(temp_data_list)
 
             usageentries = len(data_list)
@@ -31,7 +33,7 @@ def get_passwd(files_found, report_folder, seeker, wrap_text):
                 report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
                 report.start_artifact_report(report_folder, os.path.basename(report_path))
                 report.add_script()
-                data_headers = ('username', 'passwd', 'uid', 'gid', 'gecos', 'home_directory', 'login_shell')
+                data_headers = ('username', 'passwd', 'uid', 'gid', 'gecos', 'home_directory', 'login_shell', 'sourcefile')
 
                 report.write_artifact_data_table(data_headers, data_list, file_found)
                 report.end_artifact_report()
@@ -51,7 +53,7 @@ def get_passwd(files_found, report_folder, seeker, wrap_text):
                 report.start_artifact_report(report_folder, os.path.basename(report_path))
                 report.add_script()
                 data_header = []
-                data_header.append('username')
+                data_header = ('username', 'sourcefile')
 
                 report.write_artifact_data_table(data_header, data_list_uid_0, file_found)
                 report.end_artifact_report()

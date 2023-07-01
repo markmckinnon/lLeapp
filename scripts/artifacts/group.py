@@ -17,6 +17,7 @@ def get_group(files_found, report_folder, seeker, wrap_text):
                     temp_data_list = []
                     for column in line.split(':'):
                         temp_data_list.append(column)
+                    temp_data_list.append(file_found)
                     data_list.append(temp_data_list)
 
             usageentries = len(data_list)
@@ -27,7 +28,7 @@ def get_group(files_found, report_folder, seeker, wrap_text):
                 report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
                 report.start_artifact_report(report_folder, os.path.basename(report_path))
                 report.add_script()
-                data_headers = ('group_name', 'passwd', 'gid', 'list_of_users')
+                data_headers = ('group_name', 'passwd', 'gid', 'list_of_users', 'sourcefile')
 
                 report.write_artifact_data_table(data_headers, data_list, file_found)
                 report.end_artifact_report()

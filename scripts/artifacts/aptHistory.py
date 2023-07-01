@@ -37,14 +37,14 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
                     removed_program = line_list[1]
                     removed_programs = removed_program.split("), ")
                     for program in removed_programs:
-                        data_removed_programs_list.append((program.split(' (')[0], start_date, start_epoch_time))
+                        data_removed_programs_list.append((program.split(' (')[0], start_date, start_epoch_time, file_found))
                 if "End-Date" in line:
                     line_list = line.split(": ")
                     end_date = line_list[1]
                     if "Install" in history_type:
-                        data_list.append((start_date, command_line, history_type, installed_program, end_date, start_epoch_time))
+                        data_list.append((start_date, command_line, history_type, installed_program, end_date, start_epoch_time, file_found))
                     else:
-                        data_list.append((start_date, command_line, history_type, removed_program, end_date, start_epoch_time))
+                        data_list.append((start_date, command_line, history_type, removed_program, end_date, start_epoch_time, file_found))
 
         usageentries = len(data_list)
         if usageentries > 0:
@@ -54,7 +54,7 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('start_date', 'commandline', 'type', 'programs', 'end_date', 'start_date_epoch')
+            data_headers = ('start_date', 'commandline', 'type', 'programs', 'end_date', 'start_date_epoch', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
@@ -75,7 +75,7 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('installed_program', 'date_installed', 'date_installed_epoch')
+            data_headers = ('installed_program', 'date_installed', 'date_installed_epoch', 'sourcefile')
             report.write_artifact_data_table(data_headers, data_installed_programs_list, file_found)
             report.end_artifact_report()
 
@@ -95,7 +95,7 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('removed_program', 'date_removed', 'date_removed_epoch')
+            data_headers = ('removed_program', 'date_removed', 'date_removed_epoch', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_removed_programs_list, file_found)
             report.end_artifact_report()

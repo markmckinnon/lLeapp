@@ -30,6 +30,7 @@ def get_crontab(files_found, report_folder, seeker, wrap_text):
             temp_data_list.append(job.dom)
             temp_data_list.append(job.month)
             temp_data_list.append(job.dow)
+            temp_data_list.append(file_found)
             data_list.append(temp_data_list)
 
         usageentries = len(data_list)
@@ -40,7 +41,7 @@ def get_crontab(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('command', 'user', 'minute', 'hour', 'day_of_month', 'month_of_year', 'day_of_week')
+            data_headers = ('command', 'user', 'minute', 'hour', 'day_of_month', 'month_of_year', 'day_of_week', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

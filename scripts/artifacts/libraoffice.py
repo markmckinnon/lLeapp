@@ -22,17 +22,18 @@ def get_libraOfficeRecentFiles(files_found, report_folder, seeker, wrap_text):
                     temp_data_list = []
                     temp_data_list.append(owner)
                     temp_data_list.append(node['@oor:name'])
+                    temp_data_list.append(file_found)
                     data_list.append(temp_data_list)
 
         usageentries = len(data_list)
         if usageentries > 0:
             report = ArtifactHtmlReport(f'Recent Documents')
             #check for existing and get next name for report file, so report from another file does not get overwritten
-            report_path = os.path.join(report_folder, f'Recent_Documents.temphtml')
+            report_path = os.path.join(report_folder, f'Recent_Documents - {owner}.temphtml')
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('owner', 'document_name')
+            data_headers = ('owner', 'document_name', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

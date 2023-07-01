@@ -26,7 +26,7 @@ def get_trash(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('file_name', 'owner', 'original_path', 'delete_date')
+            data_headers = ('file_name', 'owner', 'original_path', 'delete_date', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, os.path.join(trash_path,'files'))
             report.end_artifact_report()
@@ -48,7 +48,7 @@ def get_trash(files_found, report_folder, seeker, wrap_text):
                     file_path = line.split("=")[1]
                 if 'DeletionDate' in line:
                     deletion_date = line.split("=")[1]
-            data_list.append((os.path.basename(file_path).replace("%20", " "), owner, file_path, deletion_date))
+            data_list.append((os.path.basename(file_path).replace("%20", " "), owner, file_path, deletion_date, file_found))
         trash_path = get_trash_name(file_found)
 
     usageentries = len(data_list)
@@ -59,7 +59,7 @@ def get_trash(files_found, report_folder, seeker, wrap_text):
         report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
         report.start_artifact_report(report_folder, os.path.basename(report_path))
         report.add_script()
-        data_headers = ('file_name', 'owner', 'original_path', 'delete_date')
+        data_headers = ('file_name', 'owner', 'original_path', 'delete_date', 'sourcefile')
 
         report.write_artifact_data_table(data_headers, data_list, file_found)
         report.end_artifact_report()

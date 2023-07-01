@@ -17,6 +17,7 @@ def get_osinfo(files_found, report_folder, seeker, wrap_text):
                 for line in lines:
                     os_info_list = line.split("=")
                     temp_data_list = [os_info_list[0], os_info_list[1].replace('"', "")]
+                    temp_data_list.append(file_found)
                     data_list.append(temp_data_list)
 
             usageentries = len(data_list)
@@ -27,7 +28,7 @@ def get_osinfo(files_found, report_folder, seeker, wrap_text):
                 report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
                 report.start_artifact_report(report_folder, os.path.basename(report_path))
                 report.add_script()
-                data_headers = ('name', 'value')
+                data_headers = ('name', 'value', 'sourcefile')
 
                 report.write_artifact_data_table(data_headers, data_list, file_found)
                 report.end_artifact_report()

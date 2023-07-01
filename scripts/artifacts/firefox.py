@@ -3,7 +3,8 @@ import sqlite3
 import textwrap
 
 from scripts.artifact_report import ArtifactHtmlReport
-from scripts.lleapfuncs import logfunc, tsv, timeline, open_sqlite_db_readonly, does_column_exist_in_db
+from scripts.lleapfuncs import logfunc, tsv, timeline, open_sqlite_db_readonly, does_column_exist_in_db, \
+    get_user_name_from_home, get_next_unused_name
 
 
 def get_firefox(files_found, report_folder, seeker, wrap_text):
@@ -12,6 +13,8 @@ def get_firefox(files_found, report_folder, seeker, wrap_text):
         file_found = str(file_found)
         if not os.path.basename(file_found) == 'places.sqlite': # skip -journal and other files
             continue
+
+        user_name = get_user_name_from_home(file_found)
 
         db = open_sqlite_db_readonly(file_found)
         cursor = db.cursor()
@@ -47,28 +50,30 @@ def get_firefox(files_found, report_folder, seeker, wrap_text):
         all_rows = cursor.fetchall()
         usageentries = len(all_rows)
         if usageentries > 0:
-            report = ArtifactHtmlReport('Firefox History')
+            report = ArtifactHtmlReport(f'Firefox History - {user_name}')
             #check for existing and get next name for report file, so report from another file does not get overwritten
-            report.start_artifact_report(report_folder, 'Firefox History')
+            report_path = os.path.join(report_folder, f'Firefox History - {user_name}.temphtml')
+            report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
+            report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
 
             if column_exists:
-                data_headers = ('Visit Date', 'URL', 'Title', 'Visit Count', 'From Visit', 'Hidden', 'Typed', 'Visit Type')
+                data_headers = ('Visit Date', 'URL', 'Title', 'Visit Count', 'From Visit', 'Hidden', 'Typed', 'Visit Type', 'username', 'sourcefile')
             else:
-                data_headers = ('Visit Date', 'URL', 'Title', 'From Visit', 'Hidden', 'Typed', 'Visit Type')
+                data_headers = ('Visit Date', 'URL', 'Title', 'From Visit', 'Hidden', 'Typed', 'Visit Type', 'username', 'sourcefile')
 
             data_list = []
             for row in all_rows:
                 if column_exists:
                     if wrap_text:
-                        data_list.append((row[0], (textwrap.fill(row[1], width=100)), row[2], row[3], row[4], row[5], row[6], row[7]))
+                        data_list.append((row[0], (textwrap.fill(row[1], width=100)), row[2], row[3], row[4], row[5], row[6], row[7], user_name, file_found))
                     else:
-                        data_list.append((row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
+                        data_list.append((row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], user_name, file_found))
                 else:
                     if wrap_text:
-                        data_list.append((row[0], (textwrap.fill(row[1], width=100)), row[2], row[3], row[4], row[5], row[6]))
+                        data_list.append((row[0], (textwrap.fill(row[1], width=100)), row[2], row[3], row[4], row[5], row[6], user_name, file_found))
                     else:
-                        data_list.append((row[0], row[1], row[2], row[3], row[4], row[5], row[6]))
+                        data_list.append((row[0], row[1], row[2], row[3], row[4], row[5], row[6], user_name, file_found))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
