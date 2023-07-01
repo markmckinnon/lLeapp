@@ -48,7 +48,7 @@ def get_chromeSearchTerms(files_found, report_folder, seeker, wrap_text):
                 if wrap_text:
                     data_list.append((row[4], row[1],(textwrap.fill(row[3], width=100)), user_name, file_found))
                 else:
-                    data_list.append((row[4], row[1], row[3]. user_name, file_found))
+                    data_list.append((row[4], row[1], row[3], user_name, file_found))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
