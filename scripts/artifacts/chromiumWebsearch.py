@@ -11,6 +11,7 @@ def get_chromeWebsearch(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if not os.path.basename(file_found) == 'History': # skip -journal and other files
             continue
         browser_name = get_browser_name(file_found)
@@ -48,9 +49,9 @@ def get_chromeWebsearch(files_found, report_folder, seeker, wrap_text):
                 search = row[0].split('search?q=')[1].split('&')[0]
                 search = urllib.parse.unquote(search).replace('+', ' ')
                 if wrap_text:
-                    data_list.append((row[3], search, (textwrap.fill(row[0], width=100)),row[1],row[2], user_name, file_found))
+                    data_list.append((row[3], search, (textwrap.fill(row[0], width=100)),row[1],row[2], user_name, source_file))
                 else:
-                    data_list.append((row[3], search, row[0], row[1], row[2]))
+                    data_list.append((row[3], search, row[0], row[1], row[2], user_name, source_file))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

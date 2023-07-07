@@ -11,6 +11,7 @@ def get_docker_config(files_found, report_folder, seeker, wrap_text):
     data_headers = []
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         temp_data_list = []
         with open(file_found, 'r', encoding='utf-8') as f:
             container_info = json.load(f)
@@ -46,7 +47,7 @@ def get_docker_config(files_found, report_folder, seeker, wrap_text):
                 temp_data_list.append(exposed_ports)
             else:
                 temp_data_list.append('')
-        temp_data_list.append(file_found)
+        temp_data_list.append(source_file)
         data_list.append(temp_data_list)
 
     usageentries = len(data_list)
@@ -62,7 +63,7 @@ def get_docker_config(files_found, report_folder, seeker, wrap_text):
         report.write_artifact_data_table(data_headers, data_list, file_found)
         report.end_artifact_report()
 
-        tsvname = f'recent_Documents'
+        tsvname = f'Docker Config'
         tsv(report_folder, data_headers, data_list, tsvname)
 
     else:
@@ -71,6 +72,6 @@ def get_docker_config(files_found, report_folder, seeker, wrap_text):
 __artifacts__ = {
         "docker_config": (
                 "Docker",
-                ('**/docker\containers\*\config.v2.json'),
+                ('**/docker/containers/*/config.v2.json'),
                 get_docker_config)
 }

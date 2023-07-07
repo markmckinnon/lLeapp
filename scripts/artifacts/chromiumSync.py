@@ -7,6 +7,7 @@ def get_chromeSync(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if not file_found.endswith('chromesync.data_store'):
             continue # Skip all other files
         
@@ -29,7 +30,7 @@ def get_chromeSync(files_found, report_folder, seeker, wrap_text):
             data_list = []
             data_list_usernames = []
             for row in all_rows:
-                data_list.append((row[0],row[1],row[2], user_name, file_found))
+                data_list.append((row[0],row[1],row[2], user_name, source_file))
                 data_list_usernames.append((row[2], row[2], 'ChronmeSync', html_report, ''))
     
             report.write_artifact_data_table(data_headers, data_list, file_found)

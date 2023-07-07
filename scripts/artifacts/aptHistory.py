@@ -10,6 +10,7 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
     for file_found in files_found:
         file_found = str(file_found)
         data_list = []
+        source_file = file_found.replace(seeker.directory, "")
         data_installed_programs_list = []
         data_removed_programs_list = []
         with open(file_found, 'r') as f:
@@ -30,21 +31,21 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
                     installed_program = line_list[1]
                     installed_programs = installed_program.split("), ")
                     for program in installed_programs:
-                        data_installed_programs_list.append((program.split(' (')[0], start_date, start_epoch_time))
+                        data_installed_programs_list.append((program.split(' (')[0], start_date, start_epoch_time, source_file))
                 if "Remove" in line:
                     line_list = line.split(": ")
                     history_type = line_list[0]
                     removed_program = line_list[1]
                     removed_programs = removed_program.split("), ")
                     for program in removed_programs:
-                        data_removed_programs_list.append((program.split(' (')[0], start_date, start_epoch_time, file_found))
+                        data_removed_programs_list.append((program.split(' (')[0], start_date, start_epoch_time, source_file))
                 if "End-Date" in line:
                     line_list = line.split(": ")
                     end_date = line_list[1]
                     if "Install" in history_type:
-                        data_list.append((start_date, command_line, history_type, installed_program, end_date, start_epoch_time, file_found))
+                        data_list.append((start_date, command_line, history_type, installed_program, end_date, start_epoch_time, source_file))
                     else:
-                        data_list.append((start_date, command_line, history_type, removed_program, end_date, start_epoch_time, file_found))
+                        data_list.append((start_date, command_line, history_type, removed_program, end_date, start_epoch_time, source_file))
 
         usageentries = len(data_list)
         if usageentries > 0:
@@ -56,7 +57,7 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
             report.add_script()
             data_headers = ('start_date', 'commandline', 'type', 'programs', 'end_date', 'start_date_epoch', 'sourcefile')
 
-            report.write_artifact_data_table(data_headers, data_list, file_found)
+            report.write_artifact_data_table(data_headers, data_list, source_file)
             report.end_artifact_report()
             
             tsvname = f'apt_history_log History'
@@ -76,7 +77,7 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
             data_headers = ('installed_program', 'date_installed', 'date_installed_epoch', 'sourcefile')
-            report.write_artifact_data_table(data_headers, data_installed_programs_list, file_found)
+            report.write_artifact_data_table(data_headers, data_installed_programs_list, source_file)
             report.end_artifact_report()
 
             tsvname = f'apt_programs_installed_log History'
@@ -97,7 +98,7 @@ def get_apt_history_log(files_found, report_folder, seeker, wrap_text):
             report.add_script()
             data_headers = ('removed_program', 'date_removed', 'date_removed_epoch', 'sourcefile')
 
-            report.write_artifact_data_table(data_headers, data_removed_programs_list, file_found)
+            report.write_artifact_data_table(data_headers, data_removed_programs_list, source_file)
             report.end_artifact_report()
 
             tsvname = f'apt_programs_removed_log History'

@@ -10,6 +10,7 @@ def get_chromeOmnibox(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if not file_found.endswith('Shortcuts'):
             continue # Skip all other files
             
@@ -49,9 +50,9 @@ def get_chromeOmnibox(files_found, report_folder, seeker, wrap_text):
             data_list = []
             for row in all_rows:
                 if wrap_text:
-                    data_list.append((row[0],row[1], row[2],(textwrap.fill(row[3], width=100)),row[4], (textwrap.fill(row[5], width=100)), row[6], row[7], user_name, file_found))
+                    data_list.append((row[0],row[1], row[2],(textwrap.fill(row[3], width=100)),row[4], (textwrap.fill(row[5], width=100)), row[6], row[7], user_name, source_file))
                 else:
-                    data_list.append((row[0],row[1],row[2],row[3],row[4], row[5], row[6], row[7], user_name, file_found))
+                    data_list.append((row[0],row[1],row[2],row[3],row[4], row[5], row[6], row[7], user_name, source_file))
             
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

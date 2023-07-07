@@ -6,7 +6,7 @@ import pathlib
 import re
 import sqlite3
 import sys
-from bs4 import BeautifulSoup
+
 try:
     import simplekml
 except:

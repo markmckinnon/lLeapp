@@ -9,6 +9,7 @@ def get_libraOfficeRecentFiles(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         data_list = []
         data_headers = []
         owner = get_user_name_from_home(file_found)
@@ -22,7 +23,8 @@ def get_libraOfficeRecentFiles(files_found, report_folder, seeker, wrap_text):
                     temp_data_list = []
                     temp_data_list.append(owner)
                     temp_data_list.append(node['@oor:name'])
-                    temp_data_list.append(file_found)
+                    temp_data_list.append("LibraOffice")
+                    temp_data_list.append(source_file)
                     data_list.append(temp_data_list)
 
         usageentries = len(data_list)
@@ -33,7 +35,7 @@ def get_libraOfficeRecentFiles(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('owner', 'document_name', 'sourcefile')
+            data_headers = ('owner', 'document_name', 'application', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

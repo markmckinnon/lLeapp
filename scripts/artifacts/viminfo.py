@@ -8,7 +8,13 @@ def get_viminfo(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
-        file_dir = file_found.split(seeker.directory + '\\')[1]
+        source_file = file_found.replace(seeker.directory, "")
+
+        try:
+            file_dir = file_found.split(seeker.directory + '\\')[1]
+        except:
+            file_dir = file_found.split(seeker.directory)[1]
+
         data_list = []
         edited_files = {}
         data_headers_file_mark = []
@@ -39,7 +45,7 @@ def get_viminfo(files_found, report_folder, seeker, wrap_text):
                             edited_files[line[2:].strip()] = ''
 
         for key in edited_files.keys():
-            data_list.append((owner, key, file_found))
+            data_list.append((owner, key, 'VIM', source_file))
 
         usageentries = len(data_list)
         if usageentries > 0:
@@ -49,7 +55,7 @@ def get_viminfo(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('owner', 'document_name', 'sourcefile')
+            data_headers = ('owner', 'document_name', 'application', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

@@ -8,7 +8,13 @@ def get_mtab(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
-        file_dir = file_found.split(seeker.directory + '\\')[1]
+        source_file = file_found.replace(seeker.directory, "")
+
+        try:
+            file_dir = file_found.split(seeker.directory + '\\')[1]
+        except:
+            file_dir = file_found.split(seeker.directory)[1]
+
         if file_dir.startswith('etc'):
             data_list = []
             with open(file_found, 'r') as f:
@@ -17,7 +23,7 @@ def get_mtab(files_found, report_folder, seeker, wrap_text):
                 for line in lines:
                     mtab_list = line.split()
                     if len(mtab_list) == 6:
-                        data_list.append((mtab_list[0], mtab_list[1], mtab_list[2], mtab_list[3], mtab_list[4], mtab_list[5], file_found))
+                        data_list.append((mtab_list[0], mtab_list[1], mtab_list[2], mtab_list[3], mtab_list[4], mtab_list[5], source_file))
 
             usageentries = len(data_list)
             if usageentries > 0:

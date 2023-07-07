@@ -46,6 +46,7 @@ def get_chromeLoginData(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if not os.path.basename(file_found) == 'Login Data': # skip -journal and other files
             continue
         browser_name = get_browser_name(file_found)
@@ -93,9 +94,9 @@ def get_chromeLoginData(files_found, report_folder, seeker, wrap_text):
                 if password_enc:
                     password = decrypt(password_enc).decode("utf-8", 'replace')
                 valid_date = get_valid_date(row[2], row[3])
-                data_list.append( (valid_date, row[0], password, row[4], row[5], browser_name, user_name, file_found) )
+                data_list.append( (valid_date, row[0], password, row[4], row[5], browser_name, user_name, source_file) )
                 data_list_usernames.append(
-                    (row[0], row[4], f'{browser_name} login data', html_report, f'Password: {password}', user_name, file_found))
+                    (row[0], row[4], f'{browser_name} login data', html_report, f'Password: {password}', user_name, source_file))
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
             

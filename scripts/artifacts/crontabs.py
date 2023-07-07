@@ -9,7 +9,13 @@ def get_crontab(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
-        file_dir = file_found.split(seeker.directory + '\\')[1]
+        source_file = file_found.replace(seeker.directory, "")
+
+        try:
+            file_dir = file_found.split(seeker.directory + '\\')[1]
+        except:
+            file_dir = file_found.split(seeker.directory)[1]
+
         if file_dir.startswith('etc'):
             username = 'root'
         elif 'docker' in file_dir:
@@ -30,7 +36,8 @@ def get_crontab(files_found, report_folder, seeker, wrap_text):
             temp_data_list.append(job.dom)
             temp_data_list.append(job.month)
             temp_data_list.append(job.dow)
-            temp_data_list.append(file_found)
+            temp_data_list.append(username)
+            temp_data_list.append(source_file)
             data_list.append(temp_data_list)
 
         usageentries = len(data_list)
@@ -41,12 +48,12 @@ def get_crontab(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9] # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('command', 'user', 'minute', 'hour', 'day_of_month', 'month_of_year', 'day_of_week', 'sourcefile')
+            data_headers = ('command', 'user', 'minute', 'hour', 'day_of_month', 'month_of_year', 'day_of_week', 'username', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
 
-            tsvname = f'{username}_crontab'
+            tsvname = f'crontab'
             tsv(report_folder, data_headers, data_list, tsvname)
 
         else:

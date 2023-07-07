@@ -10,6 +10,7 @@ def get_firefoxDownloads(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if not os.path.basename(file_found) == 'mozac_downloads_database': # skip -journal and other files
             continue
 
@@ -36,7 +37,7 @@ def get_firefoxDownloads(files_found, report_folder, seeker, wrap_text):
             data_headers = ('url', 'file_name', 'destination_directory', 'created_at', 'content_length', 'content_type', 'username','sourcefile')
             data_list = []
             for row in all_rows:
-                data_list.append((row[0],row[1],row[2],row[3],row[4],row[5], user_name, file_found))
+                data_list.append((row[0],row[1],row[2],row[3],row[4],row[5], user_name, source_file))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

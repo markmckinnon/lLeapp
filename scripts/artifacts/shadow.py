@@ -10,7 +10,13 @@ def get_shadow(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
-        file_dir = file_found.split(seeker.directory + '\\')[1]
+        source_file = file_found.replace(seeker.directory, "")
+
+        try:
+            file_dir = file_found.split(seeker.directory + '\\')[1]
+        except:
+            file_dir = file_found.split(seeker.directory)[1]
+
         if file_dir.startswith('etc'):
             data_list = []
             with open(file_found, 'r') as f:
@@ -34,7 +40,7 @@ def get_shadow(files_found, report_folder, seeker, wrap_text):
                     temp_data_list.append(line_data[5])
                     temp_data_list.append(line_data[6])
                     temp_data_list.append(line_data[7])
-                    temp_data_list.append(file_found)
+                    temp_data_list.append(source_file)
                     data_list.append(temp_data_list)
 
             usageentries = len(data_list)

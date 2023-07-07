@@ -10,6 +10,7 @@ def get_chromeBookmarks(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if not os.path.basename(file_found) == 'Bookmarks': # skip -journal and other files
             continue
         elif file_found.find('.magisk') >= 0 and file_found.find('mirror') >= 0:
@@ -40,7 +41,7 @@ def get_chromeBookmarks(files_found, report_folder, seeker, wrap_text):
                             if keyb == 'name' and flag == 1:
                                 flag = 0
                                 parent = valueb
-                                data_list.append((dateaddconv, url, name, parent, typed, user_name, file_found))
+                                data_list.append((dateaddconv, url, name, parent, typed, user_name, source_file))
         num_entries = len(data_list)
         if num_entries > 0:
             report = ArtifactHtmlReport(f'{browser_name} Bookmarks - {username}')

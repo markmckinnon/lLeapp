@@ -11,6 +11,7 @@ def get_mdadm(files_found, report_folder, seeker, wrap_text):
     data_headers = ['array', 'device_name', 'sourcefile']
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         with open(file_found, 'r', encoding='utf-8') as f:
             lines = f.readlines()
             for line in lines:
@@ -29,8 +30,9 @@ def get_mdadm(files_found, report_folder, seeker, wrap_text):
                             data_headers.append(item_list[0])
                             col_num = data_headers.index(item_list[0])
                             temp_data_list.insert(col_num, item_list[1])
-                temp_data_list.append(file_found)
-                data_list.append(temp_data_list)
+                if len(temp_data_list) > 0:
+                    temp_data_list.append(source_file)
+                    data_list.append(temp_data_list)
 
     usageentries = len(data_list)
     if usageentries > 0:

@@ -8,6 +8,7 @@ def get_chromeNetworkActionPredictor(files_found, report_folder, seeker, wrap_te
 
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if not file_found.endswith('Network Action Predictor'):
             continue # Skip all other files
             
@@ -42,7 +43,7 @@ def get_chromeNetworkActionPredictor(files_found, report_folder, seeker, wrap_te
             data_headers = ('User Text','URL','Number of Hits','Number of Misses', 'username', 'sourcefile') # Don't remove the comma, that is required to make this a tuple as there is only 1 element
             data_list = []
             for row in all_rows:
-                data_list.append((row[0],row[1],row[2],row[3], user_name, file_found))
+                data_list.append((row[0],row[1],row[2],row[3], user_name, source_file))
 
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()

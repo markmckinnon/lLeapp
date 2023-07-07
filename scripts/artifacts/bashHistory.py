@@ -8,6 +8,7 @@ def get_bash_history(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         data_list = []
         data_headers = []
         user_name = get_user_name_from_home(file_found)
@@ -15,7 +16,7 @@ def get_bash_history(files_found, report_folder, seeker, wrap_text):
             lines = f.readlines()
             for line in lines:
                 temp_data_list = []
-                temp_data_list = ((user_name, line, file_found))
+                temp_data_list = ((user_name, line, source_file))
                 data_list.append(temp_data_list)
 
         usageentries = len(data_list)
@@ -31,7 +32,7 @@ def get_bash_history(files_found, report_folder, seeker, wrap_text):
             report.write_artifact_data_table(data_headers, data_list, file_found)
             report.end_artifact_report()
             
-            tsvname = f'bash_history_{user_name}'
+            tsvname = f'bash_history'
             tsv(report_folder, data_headers, data_list, tsvname)
             
         else:

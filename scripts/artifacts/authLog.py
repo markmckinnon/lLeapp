@@ -8,6 +8,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         data_list = []
         sudo_data_list = []
         failed_data_list = []
@@ -18,7 +19,8 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
                 sudo_temp_data_list = []
                 failed_temp_data_list = []
                 timestamp = line[:15]
-                temp_data_list.append(timestamp)
+                # timestamp may have 2 spaces between Month and Day if day is single digit
+                temp_data_list.append(timestamp.replace('  ', ' 0'))
                 newLine = line[15:]
                 lineList = newLine.split(': ')
                 host_process_list = lineList[0].split(" ")
@@ -49,25 +51,31 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
                 temp_data_list.append(process)
                 temp_data_list.append(xtype)
                 temp_data_list.append(message)
-                temp_data_list.append(file_found)
+                temp_data_list.append(source_file)
                 data_list.append(temp_data_list)
 
                 if 'sudo' in process:
                     if 'pam' not in xtype:
-                        sudo_temp_data_list.append(timestamp)
+                        sudo_temp_data_list.append(timestamp.replace('  ', ' 0'))
                         sudo_temp_data_list.append(host)
                         sudo_temp_data_list.append(xtype)
-                        sudo_temp_data_list.append(file_found)
-                        for sudo_data in message.split(' ; '):
-                            sudo_temp_data_list.append(sudo_data)
+                        messages = message.split(' ; ')
+                        if len(messages) == 4:
+                            sudo_temp_data_list.append(' ')
+                            for sudo_data in messages:
+                                sudo_temp_data_list.append(sudo_data)
+                        else:
+                            for sudo_data in messages:
+                                sudo_temp_data_list.append(sudo_data)
+                        sudo_temp_data_list.append(source_file)
                         sudo_data_list.append(sudo_temp_data_list)
 
                 if 'FAILED' in line:
-                    failed_temp_data_list.append(timestamp)
+                    failed_temp_data_list.append(timestamp.replace('  ', ' 0'))
                     failed_temp_data_list.append(host)
                     failed_temp_data_list.append(process)
                     failed_temp_data_list.append(message)
-                    failed_temp_data_list.append(file_found)
+                    failed_temp_data_list.append(source_file)
                     failed_data_list.append(failed_temp_data_list)
 
         usageentries = len(data_list)
@@ -99,7 +107,7 @@ def get_auth_log(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('timestamp', 'host', 'user', 'terminal', 'print_working_directory', 'run_as', 'command', 'sourcefile')
+            data_headers = ('timestamp', 'host', 'user', 'message', 'terminal', 'print_working_directory', 'run_as', 'command', 'sourcefile')
 
             report.write_artifact_data_table(data_headers, sudo_data_list, file_found)
             report.end_artifact_report()

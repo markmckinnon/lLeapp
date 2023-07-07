@@ -9,6 +9,7 @@ def get_btmp(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         data_list = []
         with open(file_found, 'rb') as f:
             buf = f.read()
@@ -23,7 +24,7 @@ def get_btmp(files_found, report_folder, seeker, wrap_text):
                 temp_data_list.append(entry.host)
                 temp_data_list.append(entry.time)
                 temp_data_list.append(entry.sec)
-                temp_data_list.append(file_found)
+                temp_data_list.append(source_file)
                 data_list.append(temp_data_list)
 
         usageentries = len(data_list)

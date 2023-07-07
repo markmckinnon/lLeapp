@@ -8,7 +8,13 @@ def get_group(files_found, report_folder, seeker, wrap_text):
 
     for file_found in files_found:
         file_found = str(file_found)
-        file_dir = file_found.split(seeker.directory + '\\')[1]
+        source_file = file_found.replace(seeker.directory, "")
+
+        try:
+            file_dir = file_found.split(seeker.directory + '\\')[1]
+        except:
+            file_dir = file_found.split(seeker.directory)[1]
+
         if file_dir.startswith('etc'):
             data_list = []
             with open(file_found, 'r') as f:
@@ -17,7 +23,7 @@ def get_group(files_found, report_folder, seeker, wrap_text):
                     temp_data_list = []
                     for column in line.split(':'):
                         temp_data_list.append(column)
-                    temp_data_list.append(file_found)
+                    temp_data_list.append(source_file)
                     data_list.append(temp_data_list)
 
             usageentries = len(data_list)

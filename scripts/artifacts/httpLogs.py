@@ -9,6 +9,7 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
     
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         data_list = []
         ip_connection_bytes_dict = {}
         ip_connection_pages_dict = {}
@@ -33,7 +34,7 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
                     user_agent = entry.headers_in['User-Agent']
                     status = entry.final_status
                     bytes_out = entry.bytes_out
-                    temp_data_list = (timestamp, remote_ip, request, status, bytes_out, referer, user_agent, file_found)
+                    temp_data_list = (timestamp, remote_ip, request, status, bytes_out, referer, user_agent, source_file)
                     data_list.append(temp_data_list)
                     if remote_ip in ip_connection_bytes_dict:
                         ip_connection_bytes_dict[remote_ip] = ip_connection_bytes_dict[remote_ip] + bytes_out
@@ -91,7 +92,7 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
 
             ip_bytes = []
             for ip_key in ip_connection_bytes_dict.keys():
-                ip_bytes.append((ip_key, ip_connection_bytes_dict[ip_key], file_found))
+                ip_bytes.append((ip_key, ip_connection_bytes_dict[ip_key], source_file))
 
             report.write_artifact_data_table(data_headers, ip_bytes, file_found)
             report.end_artifact_report()
@@ -114,7 +115,7 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
 
             ip_page_accesses = []
             for ip_key in ip_connection_pages_dict.keys():
-                ip_page_accesses.append((ip_key, ip_connection_pages_dict[ip_key], file_found))
+                ip_page_accesses.append((ip_key, ip_connection_pages_dict[ip_key], source_file))
 
             report.write_artifact_data_table(data_headers, ip_page_accesses, file_found)
             report.end_artifact_report()
@@ -137,7 +138,7 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
 
             uri_bytes = []
             for uri_key in uri_bytes_dict.keys():
-                uri_bytes.append((uri_key, uri_bytes_dict[uri_key], file_found))
+                uri_bytes.append((uri_key, uri_bytes_dict[uri_key], source_file))
 
             report.write_artifact_data_table(data_headers, uri_bytes, file_found)
             report.end_artifact_report()
@@ -156,11 +157,11 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
             report_path = get_next_unused_name(report_path)[:-9]  # remove .temphtml
             report.start_artifact_report(report_folder, os.path.basename(report_path))
             report.add_script()
-            data_headers = ('request_method', 'num_of_accesses')
+            data_headers = ('request_method', 'num_of_accesses','sourcefile')
 
             method_count = []
             for method_key in request_method_counts.keys():
-                method_count.append((method_key, request_method_counts[method_key]))
+                method_count.append((method_key, request_method_counts[method_key], source_file))
 
             report.write_artifact_data_table(data_headers, method_count, file_found)
             report.end_artifact_report()
@@ -183,7 +184,7 @@ def get_apache_logs(files_found, report_folder, seeker, wrap_text):
 
             method_bytes = []
             for method_key in request_method_bytes.keys():
-                method_bytes.append((method_key, request_method_bytes[method_key], file_found))
+                method_bytes.append((method_key, request_method_bytes[method_key], source_file))
 
             report.write_artifact_data_table(data_headers, method_bytes, file_found)
             report.end_artifact_report()

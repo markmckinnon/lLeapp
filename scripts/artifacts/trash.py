@@ -19,6 +19,7 @@ def get_trash(files_found, report_folder, seeker, wrap_text):
     owner = None
     for file_found in files_found:
         file_found = str(file_found)
+        source_file = file_found.replace(seeker.directory, "")
         if owner != None and owner != get_user_name_from_home(file_found):
             report = ArtifactHtmlReport(f'Trash')
             # check for existing and get next name for report file, so report from another file does not get overwritten
@@ -48,7 +49,7 @@ def get_trash(files_found, report_folder, seeker, wrap_text):
                     file_path = line.split("=")[1]
                 if 'DeletionDate' in line:
                     deletion_date = line.split("=")[1]
-            data_list.append((os.path.basename(file_path).replace("%20", " "), owner, file_path, deletion_date, file_found))
+            data_list.append((os.path.basename(file_path).replace("%20", " "), owner, file_path, deletion_date, source_file))
         trash_path = get_trash_name(file_found)
 
     usageentries = len(data_list)
