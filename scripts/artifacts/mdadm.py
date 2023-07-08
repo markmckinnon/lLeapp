@@ -8,7 +8,7 @@ from scripts.lleapfuncs import logfunc, tsv, get_next_unused_name
 def get_mdadm(files_found, report_folder, seeker, wrap_text):
 
     data_list = []
-    data_headers = ['array', 'device_name', 'sourcefile']
+    data_headers = ['array', 'device_name']
     for file_found in files_found:
         file_found = str(file_found)
         source_file = file_found.replace(seeker.directory, "")
@@ -21,6 +21,7 @@ def get_mdadm(files_found, report_folder, seeker, wrap_text):
                     # Pop the first 2 entries off as they should alwasy be the same
                     temp_data_list.append(array_list.pop(0))
                     temp_data_list.append(array_list.pop(0))
+
                     for item in array_list:
                         item_list = item.split("=")
                         if item_list[0] in data_headers:
@@ -30,10 +31,11 @@ def get_mdadm(files_found, report_folder, seeker, wrap_text):
                             data_headers.append(item_list[0])
                             col_num = data_headers.index(item_list[0])
                             temp_data_list.insert(col_num, item_list[1])
-                if len(temp_data_list) > 0:
+
                     temp_data_list.append(source_file)
                     data_list.append(temp_data_list)
 
+    data_headers.append('sourcefile')
     usageentries = len(data_list)
     if usageentries > 0:
         report = ArtifactHtmlReport(f'mdadm arrays')

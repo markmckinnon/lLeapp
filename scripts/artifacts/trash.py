@@ -49,7 +49,7 @@ def get_trash(files_found, report_folder, seeker, wrap_text):
                     file_path = line.split("=")[1]
                 if 'DeletionDate' in line:
                     deletion_date = line.split("=")[1]
-            data_list.append((os.path.basename(file_path).replace("%20", " "), owner, file_path, deletion_date, source_file))
+            data_list.append((os.path.basename(file_path).replace('%20', ' '), owner, file_path, deletion_date, source_file))
         trash_path = get_trash_name(file_found)
 
     usageentries = len(data_list)
